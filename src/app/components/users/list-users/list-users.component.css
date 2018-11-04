@@ -1,0 +1,23 @@
+.fa-trash{
+  color: red;
+}
+
+.fa-edit{
+  background-color: orange;
+}
+
+.fa-eye{
+  background-color: lightblue;
+}
+
+
+#actions{
+  text-align: center;
+}
+
+
+tr:hover {
+  background-color: lightgoldenrodyellow;
+}
+
+

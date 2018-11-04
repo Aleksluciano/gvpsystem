@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-md-4">
+      <h2><i class="fa fa-university"></i>Congregações</h2>
+    </div>
+    <div class="col-md-4">
+        <h5 class="text-right text-secondary">Total: {{ congregations?.length }}</h5>
+        </div>
+  </div>
+  <div class="row">
+      <div class="col-md-8">
+  <div class="card card-body mb-3" @fade>
+    <form #congregationForm="ngForm" (ngSubmit)="onSubmit(congregationForm)">
+      <div class="form-group">
+        <input type="text"
+        name="name"
+        #nameRef
+        [ngModel]="congregation.name"
+        (ngModelChange)="congregation.name = $event"
+        class="form-control"
+        placeholder="Congregação...">
+      </div>
+      <input type="submit" [value]="textInput" class="btn btn-light" [disabled]="!congregation.name">
+      <button id="resetButton"(click)="clearState()" type="button" class="btn btn-info" [hidden]="!congregation.name && this.textInput != 'Atualizar'">Reset</button>
+    </form>
+  </div>
+</div>
+</div>
+  <div class="row">
+          <div class="col-md-3">
+          <input type="text" class="form-control" name="filteredName" [ngModel]="filteredName" (ngModelChange)="filteredName = $event"
+            placeholder="Filtrar por nome">
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="col-md-6 mt-1">
+          <table *ngIf="congregations?.length > 0;else noCongregations" class="table" >
+            <thead class="thead-dark">
+              <tr>
+                <th >Nome</th>
+                <th id="actions" colspan="2">Ações</th>
+              </tr>
+            </thead>
+            <tbody @fade>
+              <tr *ngFor="let congregation of  congregations | filter: filteredName : 'name'">
+                <td >{{ congregation.name }}</td>
+             <td ><button (click)="onSelected(congregation)" ><i class="fa fa-edit" aria-hidden="true"></i></button></td>
+              <td ><button id="deleteButton" (click)="onDeleteClick(congregation.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            </td>
+
+              </tr>
+            </tbody>
+
+          </table>
+
+        </div>
+      </div>
+
+  <!-- <ul class="list-group" *ngIf="congregations?.length > 0;else noCongregations" @fade>
+    <li *ngFor="let congregation of congregations | filter: filteredName : 'name' " [class.list-group-item-secondary]="selectedCongregation === congregation" class="list-group-item d-flex justify-content-between
+    align-items-center">
+      <a (click)="onSelected(congregation)" href="javascript:void(0);">{{ congregation.name }}</a>
+      <i (click)="onDeleteClick(congregation.id)" class="fa fa-remove"></i>
+    </li>
+
+  </ul> -->
+
+  <ng-template #noCongregations>
+    <hr><h5>Não existem congregaçõess cadastrados no sistema</h5>
+    </ng-template>
+

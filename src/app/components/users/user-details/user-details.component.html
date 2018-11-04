@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col-md-6">
+      <a routerLink="/" class="btn btn-link">
+        <i class="fa fa-arrow-circle-o-left"></i> Voltar
+      </a>
+    </div>
+    <div class="col md-6">
+      <div class="btn-group pull-right">
+        <a routerLink="/user/edit/{{ id }}" class="btn btn-warning">
+          Editar
+        </a>
+        <button (click)="onDeleteClick()" class="btn btn-danger">Deletar</button>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div *ngIf="user" class="card" @fade>
+    <h3 class="card-header">{{ user.firstName }} {{ user.lastName }}</h3>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-12 col-sm-6">
+          <h4> ID: {{ user.id }}</h4>
+        </div>
+    </div>
+      <hr>
+      <div class="row">
+      <ul class="list-group col-md-4">
+         <li class="list-group-item"><strong class="Topic">Email:</strong> {{ user.email }}</li>
+         <li class="list-group-item"><strong class="Topic">Celular:</strong> {{ user.mobilePhone }}</li>
+         <li class="list-group-item"><strong class="Topic">Telefone:</strong> {{ user.phone }}</li>
+         <li class="list-group-item"><strong class="Topic">Congregação:</strong> {{ user.congregation }}</li>
+         <li class="list-group-item"><strong class="Topic">Perfil:</strong> {{ user.perfil }}</li>
+         <li class="list-group-item"><strong class="Topic">Região:</strong> {{ user.region }}</li>
+        </ul>
+        <ul class="list-group col-md-4">
+         <li class="list-group-item"><strong class="Topic">Estado:</strong> {{ user.state }}</li>
+         <li class="list-group-item"><strong class="Topic">Cidade:</strong> {{ user.city }}</li>
+         <li class="list-group-item"><strong class="Topic">Bairro:</strong> {{ user.neighborhood }}</li>
+         <li class="list-group-item"><strong class="Topic">Logradouro:</strong> {{ user.address }}</li>
+         <li class="list-group-item"><strong class="Topic">Número:</strong> {{ user.numeral }}</li>
+         <li class="list-group-item"><strong class="Topic">Complemento:</strong> {{ user.complement }}</li>
+      </ul>
+      <ul class="list-group col-md-4">
+          <li class="list-group-item"><strong class="Topic">Cep:</strong> {{ user.cep }}</li>
+        </ul>
+    </div>
+    </div>
+  </div>
+
+
+

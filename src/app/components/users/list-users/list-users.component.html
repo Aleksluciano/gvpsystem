@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col-md-10">
+    <h2><i class="fa fa-users"></i>GVP's</h2>
+  </div>
+  <div class="col-md-2">
+    <h5 class="text-right text-secondary">Total: {{ users?.length }}</h5>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-10">
+    <div @fade>
+      <!-- <label for="filter" ><strong>Filtro</strong></label> -->
+      <div class="row">
+      <div class="col-md-3">
+      <input type="text" class="form-control" name="filteredName" [ngModel]="filteredName | titlecase" (ngModelChange)="filteredName = $event"
+        placeholder="Filtrar por nome">
+      </div>
+      <div class="col-md-3">
+        <input type="text" class="form-control" name="filteredEmail" [ngModel]="filteredEmail" (ngModelChange)="filteredEmail = $event"
+        placeholder="Filtrar por email">
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="col-md-2 mt-1">
+      <a routerLink="/user/add" class="btn btn-success btn-block">
+        <i class="fa fa-plus"> Novo</i>
+      </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-10">
+    <table *ngIf="users?.length > 0;else noUsers" class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Celular</th>
+          <th>Congregação</th>
+          <th colspan="3" id="actions">Ações</th>
+        </tr>
+      </thead>
+      <tbody @fade>
+        <tr *ngFor="let user of  users | filter: filteredName : 'firstName' : 'lastName' | filter: filteredEmail: 'email'">
+          <td><a routerLink="user/{{ user.id }}">{{ user.firstName }} {{ user.lastName }}</a></td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.mobilePhone }}</td>
+          <td>{{ user.congregation }}</td>
+        <td><button id="eyeButton" routerLink="/user/{{ user.id }}"><i class="fa fa-eye" aria-hidden="true"></i></button></td>
+        <td><button id="editButton" routerLink="/user/edit/{{ user.id }}"><i class="fa fa-edit" aria-hidden="true"></i></button></td>
+        <td><button id="deleteButton" (click)="onDeleteClick(user.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+      </td>
+
+        </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+</div>
+
+
+<ng-template #noUsers>
+  <hr>
+  <h5>Não existem irmãos cadastrados no sistema</h5>
+</ng-template>

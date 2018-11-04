@@ -1,0 +1,356 @@
+<div class="row">
+  <div class="col-md-6">
+    <a routerLink="/" class="btn btn-link">
+      <i class="fa fa-arrow-circle-o-left"></i> Voltar
+    </a>
+  </div>
+</div>
+
+<div class="card" @fade>
+  <div class="card-header">
+    Atualizar Usuário
+  </div>
+  <div class="card-body">
+      <br>
+      <h6 class="card-subtitle mb-2 text-muted">Dados pessoais</h6>
+
+    <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+
+
+      <div class="row">
+        <div class="col-md-6">
+
+          <div class="form-group">
+            <label for="firstName">Nome *</label>
+            <input
+            type="text"
+            class="form-control"
+            name="firstName"
+            #firstNameModel="ngModel"
+            [ngClass]="{'is-invalid':firstNameModel.errors && firstNameModel.touched}"
+            [ngModel]="user.firstName"
+            (ngModelChange)="user.firstName = $event"
+            minlength="3"
+            required>
+
+            <div [hidden]="!firstNameModel.errors?.required" class="invalid-feedback">
+              Nome requerido
+            </div>
+
+            <div [hidden]="!firstNameModel.errors?.minlength" class="invalid-feedback">
+              Deve ter pelo menos 3 caracteres
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="lastName">Sobrenome *</label>
+            <input
+            type="text"
+            class="form-control"
+            name="lastName"
+            #lastNameModel="ngModel"
+            [ngClass]="{'is-invalid':lastNameModel.errors && lastNameModel.touched}"
+            [ngModel]="user.lastName"
+            (ngModelChange)="user.lastName = $event"
+            minlength="2"
+            required>
+
+            <div [hidden]="!lastNameModel.errors?.required" class="invalid-feedback">
+              Sobrenome requerido
+            </div>
+
+            <div [hidden]="!lastNameModel.errors?.minlength" class="invalid-feedback">
+              Deve ter pelo menos 3 caracteres
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="row">
+
+
+            <div class="col-md-4">
+                <div class="form-group">
+                  <label for="mobilePhone">Telefone celular</label>
+                  <input
+                  type="text"
+                  class="form-control"
+                  name="mobilePhone"
+                  #mobilePhoneModel="ngModel"
+                  [ngClass]="{'is-invalid':mobilePhoneModel.errors && mobilePhoneModel.touched}"
+                  [(ngModel)]="user.mobilePhone"
+                  (keypress)="onKeyPressMobilePhone($event)"
+                  minlength="15"
+                  maxlength="15"
+                  placeholder="Ex.: (00) 00000-0000"
+                  >
+
+                  <div [hidden]="!mobilePhoneModel.errors?.minlength" class="invalid-feedback">
+                      Formato incorreto
+                    </div>
+
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="phone">Telefone Residencial</label>
+                    <input
+                    type="text"
+                    class="form-control"
+                    name="phone"
+                    #phoneModel="ngModel"
+                    [ngClass]="{'is-invalid':phoneModel.errors && phoneModel.touched}"
+                    [(ngModel)]="user.phone"
+                    (keypress)="onKeyPressPhone($event)"
+                    minlength="14"
+                    maxlength="14"
+                    placeholder="Ex.: (00) 0000-0000"
+                    >
+
+                    <div [hidden]="!phoneModel.errors?.minlength" class="invalid-feedback">
+                        Formato incorreto
+                      </div>
+
+                  </div>
+                </div>
+      </div>
+
+      <div class="row">
+
+<div class="col-md-2">
+  <br><br>
+  <h6 class="card-subtitle mb-2 text-muted">Endereço</h6>
+
+</div>
+</div>
+
+      <div class="row">
+
+       <div class="col-md-2">
+          <div class="form-group">
+              <label for="cep">CEP</label>
+              <input
+              type="text"
+              class="form-control"
+              name="cep"
+              #cepModel="ngModel"
+              [ngClass]="{'is-invalid':cepModel.errors && cepModel.touched}"
+              [(ngModel)]="user.cep"
+              >
+              <button id="cepButton" type="button" (click)="searchCep()">Buscar</button>
+            </div>
+
+          </div>
+
+            <div class="col-md-2">
+                 <div class="form-group">
+                     <label for="state">Estado</label>
+                     <input
+                     type="text"
+                     class="form-control"
+                     name="state"
+                     #stateModel="ngModel"
+                     [ngClass]="{'is-invalid':stateModel.errors && stateModel.touched}"
+                     [(ngModel)]="user.state"
+                     maxlength="2"
+
+                     >
+
+                   </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="city">Cidade</label>
+                        <input
+                        type="text"
+                        class="form-control"
+                        name="city"
+                        #cityModel="ngModel"
+                        [ngClass]="{'is-invalid':cityModel.errors && cityModel.touched}"
+                        [(ngModel)]="user.city"
+
+                        >
+
+                      </div>
+                   </div>
+
+                   <div class="col-md-3">
+                      <div class="form-group">
+                          <label for="neighborhood">Bairro</label>
+                          <input
+                          type="text"
+                          class="form-control"
+                          name="neighborhood"
+                          #neighborhoodModel="ngModel"
+                          [ngClass]="{'is-invalid':neighborhoodModel.errors && neighborhoodModel.touched}"
+                          [(ngModel)]="user.neighborhood"
+                          >
+
+                        </div>
+                     </div>
+
+                     <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="address">Logradouro (Rua, Avenida, etc)</label>
+                            <input
+                            type="text"
+                            class="form-control"
+                            name="address"
+                            #addressModel="ngModel"
+                            [ngClass]="{'is-invalid':addressModel.errors && addressModel.touched}"
+                            [(ngModel)]="user.address"
+                            >
+
+                          </div>
+                       </div>
+
+                       <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="numeral">Número</label>
+                            <input
+                            type="number"
+                            class="form-control"
+                            name="numeral"
+                            #numeralModel="ngModel"
+                            [ngClass]="{'is-invalid':numeralModel.errors && numeralModel.touched}"
+                            [(ngModel)]="user.numeral"
+                            >
+
+                          </div>
+                       </div>
+                       <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="numeral">Complemento</label>
+                            <input
+                            type="text"
+                            class="form-control"
+                            name="complement"
+                            #complementModel="ngModel"
+                            [ngClass]="{'is-invalid':
+                            complementModel.errors &&
+                            complementModel.touched}"
+                            [(ngModel)]="user.complement"
+                            >
+
+                          </div>
+                       </div>
+
+      </div>
+
+
+        <div class="row">
+
+            <div class="col-md-3">
+              <br><br>
+              <h6 class="card-subtitle mb-2 text-muted">Informações Adicionais</h6>
+
+            </div>
+            </div>
+
+            <div class="row">
+            <div class="form-group" class="col-md-3" id="sel">
+
+                <label for="congregation">Congregação *</label>
+                <select #userCongregation="ngModel" type="text" [(ngModel)]="congregation" class="form-control" name='congregation' [ngClass]="{'is-invalid':userCongregation.errors &&
+                  userCongregation.touched}"
+                  required>
+                  <option> </option>
+                  <option *ngFor="let cong of congregations" [ngValue]="cong">{{ cong?.name }}</option>
+                </select>
+
+                <div [hidden]="!userCongregation.errors?.required" class="invalid-feedback">
+                  Congregação requerida
+                </div>
+
+              </div>
+            </div>
+            <br>
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                     <label>Perfil</label><br>
+                    <label class="radio-inline">
+                        <input type="radio"  name="perfil" value="Membro" id="Membro" [(ngModel)]="user.perfil" > Membro
+                      </label>&nbsp;&nbsp;
+                      <label class="radio-inline">
+                        <input type="radio"  name="perfil" value="Secretário" id="Secretario" [(ngModel)]="user.perfil"> Secretário
+                      </label>&nbsp;&nbsp;
+                      <label class="radio-inline">
+                          <input type="radio" name="perfil" value="Coordenador" id="Coordenador" [(ngModel)]="user.perfil"> Coordenador
+                        </label>
+                      </div>
+              </div>
+
+              <div class="col-md-6">
+                  <div class="form-group">
+                   <label>Região de atuação</label><br>
+                  <label class="radio-inline">
+                      <input type="radio"  name="region" value="Leste" [(ngModel)]="user.region"> Leste
+                    </label>&nbsp;&nbsp;
+                    <label class="radio-inline">
+                      <input type="radio"  name="region" value="Oeste" [(ngModel)]="user.region"> Oeste
+                    </label>&nbsp;&nbsp;
+                    <label class="radio-inline">
+                        <input type="radio" name="region" value="Norte" [(ngModel)]="user.region"> Norte
+                      </label>&nbsp;&nbsp;
+                      <label class="radio-inline">
+                          <input type="radio" name="region" value="Sul" [(ngModel)]="user.region"> Sul
+                        </label>&nbsp;&nbsp;
+                        <label class="radio-inline">
+                            <input type="radio" name="region" value="Sudeste" [(ngModel)]="user.region"> Sudeste
+                          </label>&nbsp;&nbsp;
+                    </div>
+            </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-3">
+                  <br><br>
+                  <h6 class="card-subtitle mb-2 text-muted">Dados para Login</h6>
+
+                </div>
+                </div>
+
+
+<div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input
+          type="email"
+          class="form-control"
+          name="email"
+          #emailModel="ngModel"
+          [ngClass]="{'is-invalid':emailModel.errors && emailModel.touched}"
+          [(ngModel)]="user.email"
+          pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+          placeholder="Ex.: usuario@dominio.com"
+          required>
+
+          <div [hidden]="!emailModel.errors?.required" class="invalid-feedback">
+            Email requerido
+          </div>
+
+          <div [hidden]="!emailModel.errors?.pattern" class="invalid-feedback">
+            Formato incorreto
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+<br><br>
+
+      <input type="submit" value="Salvar" class="btn btn-primary btn-block">
+
+    </form>
+  </div>
+</div>
