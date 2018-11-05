@@ -1,8 +1,10 @@
+import { InfoModalComponent } from './components/info-modal/info-modal.component';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from "@angular/material";
+
 
 
 import { FlashMessagesModule } from 'angular2-flash-messages';
@@ -20,12 +22,14 @@ import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     ErrorComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    InfoModalComponent
   ],
   imports: [
     AppRoutingModule,
@@ -38,6 +42,6 @@ import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}],
   bootstrap: [AppComponent],
-  entryComponents:[ErrorComponent,ConfirmModalComponent]
+  entryComponents:[ErrorComponent,ConfirmModalComponent,InfoModalComponent]
 })
 export class AppModule { }

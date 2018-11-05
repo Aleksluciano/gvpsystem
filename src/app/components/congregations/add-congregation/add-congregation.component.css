@@ -19,3 +19,29 @@
 tr:hover {
   background-color: lightgoldenrodyellow;
 }
+
+#bodyForm {
+  background-color: gainsboro;
+}
+
+::placeholder{
+  opacity: 0.5;
+}
+
+
+.list-group-item {
+	font-family: Rockwell,Courier Bold,Courier,Georgia,Times,Times New Roman,serif;
+}
+
+.Topic{
+  background: blanchedalmond;
+}
+
+#arrowBack, #textVoltar{
+  color: rgb(67, 117, 211);
+}
+
+label {
+  color: blueviolet;
+  font-size: 15px;
+}

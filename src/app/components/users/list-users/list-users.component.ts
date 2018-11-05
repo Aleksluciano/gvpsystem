@@ -44,11 +44,7 @@ export class ListUsersComponent implements OnInit, OnDestroy {
       .getUsersUpdateListener()
       .subscribe( usersData  => {
        this.users = usersData
-       this.users.sort((a, b) => {
-        if (a.firstName < b.firstName ) return -1;
-        if (a.firstName > b.firstName ) return 1;
-        return 0;
-      });
+ 
       });
 
 

@@ -79,11 +79,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
       .getCongregationsUpdateListener()
       .subscribe( congregationsData  => {
        this.congregations = congregationsData;
-       this.congregations.sort((a, b) => {
-        if (a.name < b.name) return -1;
-        if (a.name > b.name) return 1;
-        return 0;
-      });
+
       });
 
 

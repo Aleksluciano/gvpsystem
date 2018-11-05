@@ -1,0 +1,222 @@
+<div class="row" >
+
+
+    <div *ngIf="hospital && modeView == false"class="col-md-6">
+    <h2 ><i class="fa fa-hospital-o"></i> Hospitais</h2>
+
+
+      <h5 class="text-right text-secondary">Total: {{ hospitals?.length }}</h5>
+
+<div id="bodyForm" class="card card-body mb-3" @fade>
+  <form #hospitalForm="ngForm" (ngSubmit)="onSubmit(hospitalForm)">
+    <div class="form-group">
+      <input type="text"
+      #nameRef
+      name="name"
+      [ngModel]="hospital.name"
+      (ngModelChange)="hospital.name = $event"
+      class="form-control"
+      placeholder="Hospital...">
+    </div>
+    <div class="row">
+
+      <div class="col-md-3">
+         <div class="form-group">
+
+             <input
+             type="text"
+             class="form-control"
+             name="cep"
+             #cepModel="ngModel"
+             [ngClass]="{'is-invalid':cepModel.errors && cepModel.touched}"
+             [(ngModel)]="hospital.cep"
+             placeholder="Cep"
+             >
+             <button id="cepButton" type="button" (click)="searchCep()">Cep</button>
+           </div>
+
+         </div>
+
+           <div class="col-md-3">
+                <div class="form-group">
+
+                    <input
+                    type="text"
+                    class="form-control"
+                    name="state"
+                    #stateModel="ngModel"
+                    [ngClass]="{'is-invalid':stateModel.errors && stateModel.touched}"
+                    [(ngModel)]="hospital.state"
+                    maxlength="2"
+                    placeholder="UF"
+                    >
+
+                  </div>
+               </div>
+
+               <div class="col-md-5">
+                   <div class="form-group">
+
+                       <input
+                       type="text"
+                       class="form-control"
+                       name="city"
+                       #cityModel="ngModel"
+                       [ngClass]="{'is-invalid':cityModel.errors && cityModel.touched}"
+                       [(ngModel)]="hospital.city"
+                       placeholder="Cidade"
+                       >
+
+                     </div>
+                  </div>
+
+                  <div class="col-md-5">
+                     <div class="form-group">
+
+                         <input
+                         type="text"
+                         class="form-control"
+                         name="neighborhood"
+                         #neighborhoodModel="ngModel"
+                         [ngClass]="{'is-invalid':neighborhoodModel.errors && neighborhoodModel.touched}"
+                         [(ngModel)]="hospital.neighborhood"
+                         placeholder="Bairro"
+                         >
+
+                       </div>
+                    </div>
+
+                    <div class="col-md-5">
+                       <div class="form-group">
+
+                           <input
+                           type="text"
+                           class="form-control"
+                           name="address"
+                           #addressModel="ngModel"
+                           [ngClass]="{'is-invalid':addressModel.errors && addressModel.touched}"
+                           [(ngModel)]="hospital.address"
+                           placeholder="Logradouro"
+                           >
+
+                         </div>
+                      </div>
+
+                      <div class="col-md-3">
+                       <div class="form-group">
+
+                           <input
+                           type="number"
+                           class="form-control"
+                           name="numeral"
+                           #numeralModel="ngModel"
+                           [ngClass]="{'is-invalid':numeralModel.errors && numeralModel.touched}"
+                           [(ngModel)]="hospital.numeral"
+                           placeholder="Número"
+                           >
+
+                         </div>
+                      </div>
+                      <div class="col-md-4">
+                       <div class="form-group">
+
+                           <input
+                           type="text"
+                           class="form-control"
+                           name="complement"
+                           #complementModel="ngModel"
+                           [ngClass]="{'is-invalid':
+                           complementModel.errors &&
+                           complementModel.touched}"
+                           [(ngModel)]="hospital.complement"
+                           placeholder="Complemento"
+                           >
+
+                         </div>
+                      </div>
+                    </div>
+    <input type="submit" [value]="textInput" class="btn btn-light" [disabled]="!hospital.name">
+    <button id="resetButton"(click)="clearState()" type="button" class="btn btn-info" [hidden]="!hospital.name && this.textInput != 'Atualizar'">Reset</button>
+  </form>
+</div>
+</div >
+
+<div *ngIf="hospital && modeView == true" class="col-md-6" >
+
+    <a   id="textVoltar" class="btn btn-link" (click)="backMainView()">
+        <i  class="fa fa-arrow-circle-o-left"></i> Voltar
+      </a>
+
+  <div class="card" @fade>
+    <h3 class="card-header">{{ hospital.name }}</h3>
+    <div class="card-body" >
+
+
+          <h4  > ID: {{ hospital.id }}</h4>
+
+
+      <hr>
+      <div class="row">
+        <ul class="list-group">
+         <li class="list-group-item"><strong class="Topic">Estado:</strong> {{ hospital.state }}</li>
+         <li class="list-group-item"><strong class="Topic">Cidade:</strong> {{ hospital.city }}</li>
+         <li class="list-group-item"><strong class="Topic">Bairro:</strong> {{ hospital.neighborhood }}</li>
+         <li class="list-group-item"><strong class="Topic">Logradouro:</strong> {{ hospital.address }}</li>
+         <li class="list-group-item"><strong class="Topic">Número:</strong> {{ hospital.numeral }}</li>
+         <li class="list-group-item"><strong class="Topic">Complemento:</strong> {{ hospital.complement }}</li>
+          <li class="list-group-item"><strong class="Topic">Cep:</strong> {{ hospital.cep }}</li>
+        </ul>
+    </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-6">
+
+        <input type="text" class="form-control" name="filteredName" [ngModel]="filteredName" (ngModelChange)="filteredName = $event"
+          placeholder="Filtrar por nome">
+
+
+
+        <div class="mt-1">
+        <table *ngIf="hospitals?.length > 0;else noHospitals" class="table" >
+          <thead class="thead-dark">
+            <tr>
+              <th>Nome</th>
+              <th id="actions" colspan="3">Ações</th>
+            </tr>
+          </thead>
+          <tbody @fade>
+            <tr *ngFor="let hospital of  hospitals | filter: filteredName : 'name'">
+              <td >{{ hospital.name }}</td>
+              <td ><button (click)="onSelectedToView(hospital)" ><i class="fa fa-eye" aria-hidden="true"></i></button></td>
+           <td ><button (click)="onSelectedToChange(hospital)" ><i class="fa fa-edit" aria-hidden="true"></i></button></td>
+            <td ><button id="deleteButton" (click)="onDeleteClick(hospital.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+          </td>
+
+            </tr>
+          </tbody>
+
+        </table>
+
+
+
+
+
+<!-- <ul class="list-group" *ngIf="hospitals?.length > 0;else noHospitals" @fade>
+  <li *ngFor="let hospital of hospitals | filter: filteredName : 'name' " [class.list-group-item-secondary]="selectedHospital === hospital" class="list-group-item d-flex justify-content-between
+  align-items-center">
+    <a (click)="onSelected(hospital)" href="javascript:void(0);">{{ hospital.name }}</a>
+    <i (click)="onDeleteClick(hospital.id)" class="fa fa-remove"></i>
+  </li>
+
+</ul> -->
+
+<ng-template #noHospitals>
+  <hr><h5>Não existem hospitais cadastrados no sistema</h5>
+  </ng-template>
+
+</div>
+</div>
+</div>
+
+

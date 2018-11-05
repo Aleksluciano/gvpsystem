@@ -100,6 +100,13 @@ export class UsersService {
       )
       .subscribe(responseData => {
         this.users = responseData.users;
+
+        this.users.sort((a, b) => {
+          if (a.firstName < b.firstName ) return -1;
+          if (a.firstName > b.firstName ) return 1;
+          return 0;
+        });
+        
         this.usersUpdated.next([...this.users]);
       });
   }

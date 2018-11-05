@@ -1,0 +1,94 @@
+.fa-trash{
+  color: red;
+}
+
+.fa-edit{
+  background-color: orange;
+}
+
+.fa-eye{
+  background-color: lightblue;
+}
+
+
+#actions{
+  text-align: center;
+}
+
+
+tr:hover {
+  background-color: lightgoldenrodyellow;
+}
+
+
+#cepButton {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 10px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: lightblue;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px #999;
+}
+
+#cepButton:hover {background-color: lightskyblue}
+
+#cepButton:active {
+  background-color: lightskyblue;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.list-group-item {
+	font-family: Rockwell,Courier Bold,Courier,Georgia,Times,Times New Roman,serif;
+}
+
+.Topic{
+  background: blanchedalmond;
+}
+
+#arrowBack, #textVoltar{
+  color: rgb(67, 117, 211);
+}
+
+label {
+  color: blueviolet;
+  font-size: 15px;
+}
+
+#cepButton {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 10px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: lightblue;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px #999;
+}
+
+#cepButton:hover {background-color: lightskyblue}
+
+#cepButton:active {
+  background-color: lightskyblue;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+#bodyForm {
+  background-color: gainsboro;
+}
+
+::placeholder{
+  opacity: 0.5;
+}
+

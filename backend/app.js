@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 
 const usersRoutes = require("./routes/users");
 const congregationsRoutes = require("./routes/congregations");
+const hospitalsRoutes = require("./routes/hospitals");
 //const config = require('./config/default.json');
 
 const app = express();
@@ -45,6 +46,7 @@ app.use((req, res, next) => {
 // app.use("/api/posts", postsRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/congregations", congregationsRoutes);
+app.use("/api/hospitals", hospitalsRoutes);
 
 // app.use((req, res, next) => {
 //   res.sendFile(path.join(__dirname, "angular", "index.html"));

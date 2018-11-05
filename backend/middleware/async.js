@@ -5,6 +5,7 @@ module.exports = function (handler) {
     }
     catch(error) {
       console.log(error);
+      if(error.kind == 'unique')error.message = 'O nome já existe no banco de dados';
       res.status(500).json({
         message: error.message
       });
