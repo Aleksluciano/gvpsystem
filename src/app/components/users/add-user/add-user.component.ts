@@ -9,6 +9,8 @@ import { User } from "../user.model";
 import { UsersService } from "../users.service";
 import { Congregation } from "../../congregations/congregation.model";
 import { CongregationsService } from "../../congregations/congregations.service";
+import { MatDialog } from "@angular/material";
+import { InfoModalComponent } from "gvpsystem/src/app/components/info-modal/info-modal.component";
 
 @Component({
   selector: "app-add-user",
@@ -58,7 +60,8 @@ export class AddUserComponent implements OnInit, OnDestroy {
     private flashMessage: FlashMessagesService,
     private usersService: UsersService,
     private congregationsService: CongregationsService,
-    private viacep: NgxViacepService
+    private viacep: NgxViacepService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -114,6 +117,11 @@ export class AddUserComponent implements OnInit, OnDestroy {
      }).catch( (error ) => {
       // Alguma coisa deu errado :/
       console.log(error.message);
+      this.dialog.open(InfoModalComponent, {
+        data: { title: "Erro", message: error.message }
+      });
+
+
      });
 
   }

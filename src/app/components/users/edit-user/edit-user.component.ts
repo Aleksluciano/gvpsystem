@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material';
 import { Congregation } from "./../../congregations/congregation.model";
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { trigger, transition, style, animate } from "@angular/animations";
@@ -10,6 +11,7 @@ import { User } from "../user.model";
 import { UsersService } from "../users.service";
 import { Subscription } from "rxjs";
 import { CongregationsService } from "../../congregations/congregations.service";
+import { InfoModalComponent } from "gvpsystem/src/app/components/info-modal/info-modal.component";
 
 @Component({
   selector: "app-edit-user",
@@ -35,6 +37,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
     private congregationsService: CongregationsService,
     private viacep: NgxViacepService,
     private route: ActivatedRoute,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -55,7 +58,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
       .getCongregationsUpdateListener()
       .subscribe(congregationsData => {
         this.congregations = congregationsData;
-        
+
         this.congregation = this.searchCongregation();
       });
   }
@@ -91,6 +94,10 @@ export class EditUserComponent implements OnInit, OnDestroy {
       .catch(error => {
         // Alguma coisa deu errado :/
         console.log(error.message);
+        this.dialog.open(InfoModalComponent, {
+          data: { title: "Erro", message: error.message }
+        });
+
       });
   }
 
