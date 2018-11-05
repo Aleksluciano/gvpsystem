@@ -115,7 +115,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
       this.user.address = endereco.logradouro;
       console.log(endereco);
      }).catch( (error ) => {
-      // Alguma coisa deu errado :/
+
       console.log(error.message);
       this.dialog.open(InfoModalComponent, {
         data: { title: "Erro", message: error.message }
