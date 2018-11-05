@@ -92,3 +92,7 @@ label {
   opacity: 0.5;
 }
 
+.thead-inverse th {
+  color: #fff;
+  background-color: #373a3c;
+}

@@ -51,5 +51,9 @@ label {
   border-color: #130269;
 }
 
+::placeholder{
+  opacity: 0.5;
+}
+
 
 
