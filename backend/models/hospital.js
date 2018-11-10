@@ -12,6 +12,6 @@ const hospitalSchema = mongoose.Schema({
    complement: { type: String }
 });
 
-hospitalSchema.plugin(uniqueValidator);
+hospitalSchema.plugin(uniqueValidator, { message: 'O nome já existe no sistema!' });
 
 module.exports = mongoose.model("Hospital", hospitalSchema);

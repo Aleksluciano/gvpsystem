@@ -20,6 +20,6 @@ const userSchema = mongoose.Schema({
    password: { type: String, required: true }
 });
 
-userSchema.plugin(uniqueValidator);
+userSchema.plugin(uniqueValidator, { message: 'O email já existe no sistema!' });
 
 module.exports = mongoose.model("User", userSchema);

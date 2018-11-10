@@ -5,6 +5,6 @@ const congregationSchema = mongoose.Schema({
    name: { type: String, required: true, unique: true},
 });
 
-congregationSchema.plugin(uniqueValidator);
+congregationSchema.plugin(uniqueValidator, { message: 'O nome já existe no sistema!' });
 
 module.exports = mongoose.model("Congregation", congregationSchema);
