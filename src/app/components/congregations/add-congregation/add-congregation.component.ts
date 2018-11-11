@@ -25,7 +25,6 @@ import { ConfirmModalComponent } from "../../confirm-modal/confirm-modal.compone
 export class AddCongregationComponent implements OnInit, OnDestroy {
   congregations: Congregation[] = [];
   congregationsSub: Subscription;
-  selectedCongregation: Congregation;
   loaded: boolean = false;
   isNew: boolean = true;
   textInput = "Criar";
@@ -68,7 +67,6 @@ export class AddCongregationComponent implements OnInit, OnDestroy {
     this.modeView = false;
     this.isNew = false;
     this.textInput = "Atualizar";
-    this.selectedCongregation = this.congregation;
     window.scrollTo(0, 0);
   }
 
@@ -78,7 +76,6 @@ export class AddCongregationComponent implements OnInit, OnDestroy {
       name: congregation.name
     };
 
-    this.selectedCongregation = this.congregation;
     this.modeView = true;
 
     window.scrollTo(0, 0);
@@ -105,56 +102,37 @@ export class AddCongregationComponent implements OnInit, OnDestroy {
     } else if (this.isNew) {
       this.congregationsService.createCongregation(value);
 
-      this.congregation = {
-        id: "",
-        name: ""
-      };
-
-      this.selectedCongregation = {
-        id: "",
-        name: ""
-      };
+      this.congregation = this.clearModel();
     } else {
-      value.id = this.selectedCongregation.id;
+      value.id = this.congregation.id;
 
       this.congregationsService.updateCongregation(value.id, value);
 
-      this.congregation = {
-        id: "",
-        name: ""
-      };
+     this.clearState();
 
-      this.selectedCongregation = {
-        id: "",
-        name: ""
-      };
-      this.textInput = "Criar";
-      this.isNew = true;
     }
   }
 
-  clearState() {
-    console.log(this.congregation, this.selectedCongregation);
-
-    this.isNew = true;
-    this.congregation = {
-      id: "",
-      name: ""
-    };
-
-    this.textInput = "Criar";
-    this.selectedCongregation = {
-      id: "",
-      name: ""
-    };
-  }
-
   backMainView() {
-    this.clearState();
     this.modeView = false;
+    this.clearState();
   }
 
   ngOnDestroy() {
     this.congregationsSub.unsubscribe();
+  }
+
+  clearState() {
+    this.congregation = this.clearModel();
+    this.isNew = true;
+    this.textInput = "Criar";
+  }
+
+  clearModel() {
+    let model: Congregation;
+    return model = {
+      id: "",
+      name: ""
+    }
   }
 }

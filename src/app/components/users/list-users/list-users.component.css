@@ -20,4 +20,6 @@ tr:hover {
   background-color: lightgoldenrodyellow;
 }
 
-
+::placeholder{
+  opacity: 0.5;
+}

@@ -20,9 +20,9 @@
     </div>
     <div class="row">
 
-      <div class="col-md-3">
+      <div class="col-md-4">
          <div class="form-group">
-
+            <div class="input-group">
              <input
              type="text"
              class="form-control"
@@ -32,8 +32,14 @@
              [(ngModel)]="hospital.cep"
              placeholder="Cep"
              >
-             <button id="cepButton" type="button" (click)="searchCep()">Cep</button>
+             <span class="input-group-btn">
+
+                <button id="cepButton" type="button" class="btn btn-info" (click)="searchCep()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                 </button>
+             </span>
            </div>
+          </div>
 
          </div>
 
@@ -112,7 +118,7 @@
                            #numeralModel="ngModel"
                            [ngClass]="{'is-invalid':numeralModel.errors && numeralModel.touched}"
                            [(ngModel)]="hospital.numeral"
-                           placeholder="Número"
+                           placeholder="Nº"
                            >
 
                          </div>

@@ -15,7 +15,8 @@ const routes: Routes = [
   {path: "user/:id", component: UserDetailsComponent},
   {path: "congregations", loadChildren: "./components/congregations/congregations.module#CongregationsModule"},
   {path: "hospitals", loadChildren: "./components/hospitals/hospitals.module#HospitalsModule"},
-
+  {path: "accommodations", loadChildren: "./components/accommodations/accommodations.module#AccommodationsModule"},
+  {path: "assistants", loadChildren: "./components/social-assistants/assistants.module#AssistantsModule"},
 ]
 
 @NgModule({

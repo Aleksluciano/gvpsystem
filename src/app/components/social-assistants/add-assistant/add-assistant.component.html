@@ -1,3 +1,175 @@
-<p>
-  add-assistant works!
-</p>
+<div class="row" >
+
+
+    <div *ngIf="assistant && modeView == false"class="col-md-6">
+    <h2 ><i class="fa fa-vcard"></i> Assistentes Sociais</h2>
+
+
+      <h5 class="text-right text-secondary">Total: {{ assistants?.length }}</h5>
+
+  <div id="bodyForm" class="card card-body mb-3" @fade>
+  <form #assistantForm="ngForm" (ngSubmit)="onSubmit(assistantForm)">
+    <div class="form-group">
+      <input type="text"
+      #nameRef
+      name="name"
+      [ngModel]="assistant.name"
+      (ngModelChange)="assistant.name = $event"
+      class="form-control"
+      placeholder="Assistente Social...">
+    </div>
+    <div class="mt-2">
+        Adicionar hospitais:
+      </div>
+
+    <div class="row">
+
+        <div class="form-group" class="col-md-6" id="sel">
+             <div class="input-group">
+            <select  #userHospital="ngModel" type="text" [(ngModel)]="hospital" class="form-control" name='hospital' [ngClass]="{'is-invalid':userHospital.errors &&
+              userHospital.touched}">
+              <option > </option>
+              <option *ngFor="let hosp of hospitals" [ngValue]="hosp" >{{ hosp?.name }}</option>
+            </select>
+            <span class="input-group-btn" >
+
+                <button  id="addHospital" type="button" class="btn btn-info" (click)="addHospital(hospital.name)">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                 </button>
+             </span>
+            </div>
+
+          </div>
+        </div>
+        <div *ngIf="assistant.hospitals?.length > 0" class="mt-2">
+          Hospitais que tabalha:
+        </div>
+        <div>
+            <ul class="list-group" *ngIf="assistant.hospitals?.length > 0" @fade>
+                <li *ngFor="let hosp of assistant.hospitals" class="list-group-item d-flex justify-content-between
+                align-items-center">
+                    <a >{{ hosp }}</a>
+                  <i (click)="removeHospital(hosp)" class="fa fa-remove"></i>
+                </li>
+
+              </ul>
+        </div>
+    <div class="row mt-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input
+                          type="text"
+                          class="form-control"
+                          name="mobilePhone"
+                          #mobilePhoneModel="ngModel"
+                          [ngClass]="{'is-invalid':mobilePhoneModel.errors && mobilePhoneModel.touched}"
+                          [(ngModel)]="assistant.mobilePhone"
+                          (keypress)="maskPhones.onKeyPressMobilePhone($event)"
+                          minlength="15"
+                          maxlength="15"
+                          placeholder="(00) 00000-0000 - celular"
+                          >
+
+                          <div [hidden]="!mobilePhoneModel.errors?.minlength" class="invalid-feedback">
+                              Formato incorreto
+                            </div>
+
+                        </div>
+                      </div>
+
+
+                        <div class="col-md-6">
+
+
+                          <div class="form-group">
+                              <input
+                            type="text"
+                            class="form-control"
+                            name="phone"
+                            #phoneModel="ngModel"
+                            [ngClass]="{'is-invalid':phoneModel.errors && phoneModel.touched}"
+                            [(ngModel)]="assistant.phone"
+                            (keypress)="maskPhones.onKeyPressPhone($event)"
+                            minlength="14"
+                            maxlength="14"
+                            placeholder="(00) 0000-0000 - fixo"
+                            >
+
+                            <div [hidden]="!phoneModel.errors?.minlength" class="invalid-feedback">
+                                Formato incorreto
+                              </div>
+
+                          </div>
+                        </div>
+                      </div>
+
+    <input type="submit" [value]="textInput" class="btn btn-light" [disabled]="!assistant.name">
+    <button id="resetButton"(click)="clearState()" type="button" class="btn btn-info" [hidden]="!assistant.name && this.textInput != 'Atualizar'">Reset</button>
+  </form>
+  </div>
+  </div >
+
+  <div *ngIf="assistant && modeView == true" class="col-md-6" >
+
+    <a   id="textVoltar" class="btn btn-link" (click)="backMainView()">
+        <i  class="fa fa-arrow-circle-o-left"></i> Voltar
+      </a>
+
+  <div class="card" @fade>
+    <h3 class="card-header">{{ assistant.name }}</h3>
+    <div class="card-body" >
+
+
+          <h4  > ID: {{ assistant.id }}</h4>
+
+
+      <hr>
+      <div class="row">
+        <ul class="list-group col-md-6">
+            <li class="list-group-item"><strong class="Topic">Hospitais que trabalha:</strong> {{ assistant.hospitals.toString()}} </li>
+            <li class="list-group-item"><strong class="Topic">Celular:</strong> {{ assistant.mobilePhone }}</li>
+             <li class="list-group-item"><strong class="Topic">Telefone:</strong> {{ assistant.phone }}</li>
+           </ul>
+    </div>
+    </div>
+  </div>
+  </div>
+  <div class="col-md-6">
+
+        <input type="text" class="form-control" name="filteredName" [ngModel]="filteredName" (ngModelChange)="filteredName = $event"
+          placeholder="Filtrar por nome">
+
+
+
+        <div class="mt-1">
+        <table *ngIf="assistants?.length > 0;else noAssistants" class="table" >
+          <thead class="thead-dark">
+            <tr>
+              <th>Nome</th>
+              <th id="actions" colspan="3">Ações</th>
+            </tr>
+          </thead>
+          <tbody @fade>
+            <tr *ngFor="let assistant of  assistants | filter: filteredName : 'name'">
+              <td >{{ assistant.name }}</td>
+              <td ><button (click)="onSelectedToView(assistant)" ><i class="fa fa-eye" aria-hidden="true"></i></button></td>
+           <td ><button (click)="onSelectedToChange(assistant)" ><i class="fa fa-edit" aria-hidden="true"></i></button></td>
+            <td ><button id="deleteButton" (click)="onDeleteClick(assistant.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+          </td>
+
+            </tr>
+          </tbody>
+
+        </table>
+
+
+
+  <ng-template #noAssistants>
+  <hr><h5>Não existem assistentes sociais cadastrados no sistema</h5>
+  </ng-template>
+
+  </div>
+  </div>
+  </div>
+
+

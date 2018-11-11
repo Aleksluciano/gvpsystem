@@ -3,28 +3,7 @@ label {
   font-size: 15px;
 }
 
-#cepButton {
-  display: inline-block;
-  padding: 5px 10px;
-  font-size: 10px;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  outline: none;
-  color: #fff;
-  background-color: lightblue;
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 5px #999;
-}
 
-#cepButton:hover {background-color: lightskyblue}
-
-#cepButton:active {
-  background-color: lightskyblue;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
 
 .radio-inline{
   color: black;

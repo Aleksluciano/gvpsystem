@@ -85,7 +85,7 @@
                   #mobilePhoneModel="ngModel"
                   [ngClass]="{'is-invalid':mobilePhoneModel.errors && mobilePhoneModel.touched}"
                   [(ngModel)]="user.mobilePhone"
-                  (keypress)="onKeyPressMobilePhone($event)"
+                  (keypress)="maskPhones.onKeyPressMobilePhone($event)"
                   minlength="15"
                   maxlength="15"
                   placeholder="Ex.: (00) 00000-0000"
@@ -108,7 +108,7 @@
                     #phoneModel="ngModel"
                     [ngClass]="{'is-invalid':phoneModel.errors && phoneModel.touched}"
                     [(ngModel)]="user.phone"
-                    (keypress)="onKeyPressPhone($event)"
+                    (keypress)="maskPhones.onKeyPressPhone($event)"
                     minlength="14"
                     maxlength="14"
                     placeholder="Ex.: (00) 0000-0000"
@@ -135,7 +135,9 @@
 
        <div class="col-md-2">
           <div class="form-group">
+
               <label for="cep">CEP</label>
+              <div class="input-group">
               <input
               type="text"
               class="form-control"
@@ -144,7 +146,13 @@
               [ngClass]="{'is-invalid':cepModel.errors && cepModel.touched}"
               [(ngModel)]="user.cep"
               >
-              <button id="cepButton" type="button" (click)="searchCep()">Buscar</button>
+              <span class="input-group-btn">
+
+                  <button id="cepButton" type="button" class="btn btn-info" (click)="searchCep()">
+                      <i class="fa fa-search" aria-hidden="true"></i>
+                   </button>
+               </span>
+              </div>
             </div>
 
           </div>
@@ -271,7 +279,7 @@
                 </div>
 
               </div>
-  
+
             </div>
             <br>
             <div class="row">

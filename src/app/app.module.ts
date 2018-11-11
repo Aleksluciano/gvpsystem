@@ -17,8 +17,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ErrorInterceptor } from './error-interceptor';
 import { ErrorComponent } from './error/error.component';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
-import { AddAccommodationComponent } from './components/accommodations/add-accommodation/add-accommodation.component';
-import { AddAssistantComponent } from './components/social-assistants/add-assistant/add-assistant.component';
 
 
 
@@ -31,9 +29,7 @@ import { AddAssistantComponent } from './components/social-assistants/add-assist
     NavbarComponent,
     ErrorComponent,
     ConfirmModalComponent,
-    InfoModalComponent,
-    AddAccommodationComponent,
-    AddAssistantComponent
+    InfoModalComponent
   ],
   imports: [
     AppRoutingModule,

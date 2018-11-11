@@ -4,20 +4,20 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { AddAccommodationComponent } from "./add-accommodation/add-accommodation.component";
+import { AddAssistantComponent } from "./add-assistant/add-assistant.component";
 import { FilterModule } from 'src/app/pipes/filter.module';
-import { AccommodationsRoutingModule } from './accommodations-routing.module';
+import { AssistantsRoutingModule } from './assistants-routing.module';
 
 @NgModule({
   declarations: [
-    AddAccommodationComponent
+    AddAssistantComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
-    AccommodationsRoutingModule,
+    AssistantsRoutingModule,
     FilterModule,
     NgxViacepModule
   ]
 })
-export class AccommodationsModule { }
+export class AssistantsModule { }

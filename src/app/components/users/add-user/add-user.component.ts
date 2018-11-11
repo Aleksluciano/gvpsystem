@@ -1,3 +1,4 @@
+
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from "@angular/core";
 import { trigger, transition, style, animate } from "@angular/animations";
 import { FlashMessagesService } from "angular2-flash-messages";
@@ -10,7 +11,8 @@ import { UsersService } from "../users.service";
 import { Congregation } from "../../congregations/congregation.model";
 import { CongregationsService } from "../../congregations/congregations.service";
 import { MatDialog } from "@angular/material";
-import { InfoModalComponent } from "gvpsystem/src/app/components/info-modal/info-modal.component";
+import { InfoModalComponent } from "../../info-modal/info-modal.component";
+import { MaskPhones } from "../../../mask/phone-mask";
 
 @Component({
   selector: "app-add-user",
@@ -36,6 +38,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
   congregation: Congregation = { id: "", name: ""};
 
 
+
   user: User = {
     id: "",
     firstName: "",
@@ -56,6 +59,8 @@ export class AddUserComponent implements OnInit, OnDestroy {
     password: ""
   };
 
+  maskPhones = new MaskPhones(this.user);
+
   constructor(
     private flashMessage: FlashMessagesService,
     private usersService: UsersService,
@@ -65,6 +70,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+
 
 
     this.usersSub = this.usersService
@@ -95,7 +101,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
         cssClass: "alert-danger",
         timeout: 4000
       });
-      this.firstNameRef.nativeElement.focus();
+      window.scrollTo(0, 0);
     } else {
       console.log(value);
       // Add new client
@@ -126,61 +132,9 @@ export class AddUserComponent implements OnInit, OnDestroy {
 
   }
 
-  onKeyPressMobilePhone(event: any) {
-    const pattern = /[0-9\+\-\ ]/;
-    let inputChar = String.fromCharCode(event.charCode);
-
-    if (
-      (event.keyCode != 8 && !pattern.test(inputChar)) ||
-      event.keyCode == 32
-    ) {
-      event.preventDefault();
-    }
-
-    let substr = this.user.mobilePhone.substring(0, 1);
-    let oldString = this.user.mobilePhone;
-    let lengthString = this.user.mobilePhone.length;
-
-    if (substr == "(" && lengthString == 3)
-      this.user.mobilePhone = oldString + ") ";
-    else if (substr != "(" && lengthString == 2) {
-      this.user.mobilePhone = "(" + oldString + ") ";
-    }
-
-    if (lengthString == 10) {
-      this.user.mobilePhone = this.user.mobilePhone + "-";
-    }
-  }
-
-  onKeyPressPhone(event: any) {
-    const pattern = /[0-9\+\-\ ]/;
-    let inputChar = String.fromCharCode(event.charCode);
-
-    if (
-      (event.keyCode != 8 && !pattern.test(inputChar)) ||
-      event.keyCode == 32
-    ) {
-      event.preventDefault();
-    }
-
-    let substr = this.user.phone.substring(0, 1);
-    let oldString = this.user.phone;
-    let lengthString = this.user.phone.length;
-
-    if (substr == "(" && lengthString == 3) this.user.phone = oldString + ") ";
-    else if (substr != "(" && lengthString == 2) {
-      this.user.phone = "(" + oldString + ") ";
-    }
-
-    if (lengthString == 9) {
-      this.user.phone = this.user.phone + "-";
-    }
-
-
-  }
 
   resetForm(){
-    this.firstNameRef.nativeElement.focus();
+    window.scrollTo(0, 0);
     this.form.resetForm();
 
     //Reset form and focus

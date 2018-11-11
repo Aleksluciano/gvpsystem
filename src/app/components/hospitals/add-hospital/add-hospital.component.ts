@@ -27,7 +27,6 @@ import { NgxViacepService } from "@brunoc/ngx-viacep";
 export class AddHospitalComponent implements OnInit, OnDestroy {
   hospitals: Hospital[] = [];
   hospitalsSub: Subscription;
-  selectedHospital: Hospital;
   loaded: boolean = false;
   isNew: boolean = true;
   textInput = "Criar";
@@ -81,7 +80,6 @@ export class AddHospitalComponent implements OnInit, OnDestroy {
     this.modeView = false;
     this.isNew = false;
     this.textInput = "Atualizar";
-    this.selectedHospital = this.hospital;
     window.scrollTo(0, 0);
   }
 
@@ -98,7 +96,6 @@ export class AddHospitalComponent implements OnInit, OnDestroy {
       complement: hospital.complement
     };
 
-    this.selectedHospital = this.hospital;
     this.modeView = true;
 
     window.scrollTo(0, 0);
@@ -124,90 +121,17 @@ export class AddHospitalComponent implements OnInit, OnDestroy {
     if (!valid) {
     } else if (this.isNew) {
       this.hospitalsService.createHospital(value);
-
-      this.hospital = {
-        id: "",
-        name: "",
-        cep: "",
-        state: "",
-        city: "",
-        neighborhood: "",
-        address: "",
-        numeral: null,
-        complement: ""
-      };
-
-      this.selectedHospital = {
-        id: "",
-        name: "",
-        cep: "",
-        state: "",
-        city: "",
-        neighborhood: "",
-        address: "",
-        numeral: null,
-        complement: ""
-      };
+      this.hospital = this.clearModel();
     } else {
-      value.id = this.selectedHospital.id;
+      value.id = this.hospital.id;
 
       this.hospitalsService.updateHospital(value.id, value);
 
-      this.hospital = {
-        id: "",
-        name: "",
-        cep: "",
-        state: "",
-        city: "",
-        neighborhood: "",
-        address: "",
-        numeral: null,
-        complement: ""
-      };
+      this.clearState();
 
-      this.selectedHospital = {
-        id: "",
-        name: "",
-        cep: "",
-        state: "",
-        city: "",
-        neighborhood: "",
-        address: "",
-        numeral: null,
-        complement: ""
-      };
-      this.textInput = "Criar";
-      this.isNew = true;
     }
   }
 
-  clearState() {
-    this.isNew = true;
-    this.hospital = {
-      id: "",
-      name: "",
-      cep: "",
-      state: "",
-      city: "",
-      neighborhood: "",
-      address: "",
-      numeral: null,
-      complement: ""
-    };
-
-    this.textInput = "Criar";
-    this.selectedHospital = {
-      id: "",
-      name: "",
-      cep: "",
-      state: "",
-      city: "",
-      neighborhood: "",
-      address: "",
-      numeral: null,
-      complement: ""
-    };
-  }
 
   searchCep() {
     if (!this.hospital.cep) return;
@@ -237,5 +161,27 @@ export class AddHospitalComponent implements OnInit, OnDestroy {
   backMainView() {
     this.clearState();
     this.modeView = false;
+  }
+
+
+  clearState() {
+    this.hospital = this.clearModel();
+    this.isNew = true;
+    this.textInput = "Criar";
+  }
+
+  clearModel() {
+    let model: Hospital;
+    return model = {
+      id: "",
+      name: "",
+      cep: "",
+      state: "",
+      city: "",
+      neighborhood: "",
+      address: "",
+      numeral: null,
+      complement: ""
+    };
   }
 }

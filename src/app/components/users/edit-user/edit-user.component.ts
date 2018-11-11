@@ -1,3 +1,4 @@
+
 import { MatDialog } from '@angular/material';
 import { Congregation } from "./../../congregations/congregation.model";
 import { Component, OnInit, OnDestroy } from "@angular/core";
@@ -11,7 +12,8 @@ import { User } from "../user.model";
 import { UsersService } from "../users.service";
 import { Subscription } from "rxjs";
 import { CongregationsService } from "../../congregations/congregations.service";
-import { InfoModalComponent } from "gvpsystem/src/app/components/info-modal/info-modal.component";
+import { InfoModalComponent } from "../../info-modal/info-modal.component";
+import { MaskPhones } from 'src/app/mask/phone-mask';
 
 @Component({
   selector: "app-edit-user",
@@ -26,6 +28,7 @@ import { InfoModalComponent } from "gvpsystem/src/app/components/info-modal/info
 export class EditUserComponent implements OnInit, OnDestroy {
   id: string;
   user: User;
+  maskPhones: MaskPhones;
 
   congregations: Congregation[] = [];
   congregationsSub: Subscription;
@@ -45,6 +48,9 @@ export class EditUserComponent implements OnInit, OnDestroy {
     this.id = this.route.snapshot.params["id"];
     // Get client
     this.user = this.usersService.getUser(this.id);
+    this.maskPhones = new MaskPhones(this.user);
+
+
 
     this.congregations = this.congregationsService.Congregations;
 
@@ -101,57 +107,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
       });
   }
 
-  onKeyPressMobilePhone(event: any) {
-    const pattern = /[0-9\+\-\ ]/;
-    let inputChar = String.fromCharCode(event.charCode);
-
-    if (
-      (event.keyCode != 8 && !pattern.test(inputChar)) ||
-      event.keyCode == 32
-    ) {
-      event.preventDefault();
-    }
-
-    let substr = this.user.mobilePhone.substring(0, 1);
-    let oldString = this.user.mobilePhone;
-    let lengthString = this.user.mobilePhone.length;
-
-    if (substr == "(" && lengthString == 3)
-      this.user.mobilePhone = oldString + ") ";
-    else if (substr != "(" && lengthString == 2) {
-      this.user.mobilePhone = "(" + oldString + ") ";
-    }
-
-    if (lengthString == 10) {
-      this.user.mobilePhone = this.user.mobilePhone + "-";
-    }
-  }
-
-  onKeyPressPhone(event: any) {
-    const pattern = /[0-9\+\-\ ]/;
-    let inputChar = String.fromCharCode(event.charCode);
-
-    if (
-      (event.keyCode != 8 && !pattern.test(inputChar)) ||
-      event.keyCode == 32
-    ) {
-      event.preventDefault();
-    }
-
-    let substr = this.user.phone.substring(0, 1);
-    let oldString = this.user.phone;
-    let lengthString = this.user.phone.length;
-
-    if (substr == "(" && lengthString == 3) this.user.phone = oldString + ") ";
-    else if (substr != "(" && lengthString == 2) {
-      this.user.phone = "(" + oldString + ") ";
-    }
-
-    if (lengthString == 9) {
-      this.user.phone = this.user.phone + "-";
-    }
-  }
-
+  
   ngOnDestroy() {
     this.congregationsSub.unsubscribe();
   }
