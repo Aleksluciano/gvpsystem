@@ -38,8 +38,17 @@ export class AddAssistantComponent implements OnInit, OnDestroy {
   maskPhones: MaskPhones;
 
   hospitals: Hospital[] = [];
-  hospital: Hospital;
-
+  hospital: Hospital = {
+    id: "",
+    name: "",
+    cep: "",
+    state: "",
+    city: "",
+    neighborhood: "",
+    address: "",
+    numeral: null,
+    complement: ""
+  };
 
   modeView = false;
 
@@ -60,9 +69,9 @@ export class AddAssistantComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+
     this.assistant = this.clearModel();
     this.maskPhones = new MaskPhones(this.assistant);
-
     this.assistants = this.assistantsService.Assistants;
 
     if (this.assistants.length <= 0)
@@ -72,7 +81,6 @@ export class AddAssistantComponent implements OnInit, OnDestroy {
       .getAssistantsUpdateListener()
       .subscribe(assistantsData => {
         this.assistants = assistantsData;
-
       });
 
 
@@ -84,6 +92,7 @@ export class AddAssistantComponent implements OnInit, OnDestroy {
         .getHospitalsUpdateListener()
         .subscribe(hospitalsData => {
           this.hospitals = hospitalsData;
+
         });
   }
 
@@ -140,12 +149,32 @@ export class AddAssistantComponent implements OnInit, OnDestroy {
 
       value.hospitals = this.assistant.hospitals;
       this.assistantsService.createAssistant(value);
-      this.hospital = null;
+      this.hospital = {
+        id: "",
+        name: "",
+        cep: "",
+        state: "",
+        city: "",
+        neighborhood: "",
+        address: "",
+        numeral: null,
+        complement: ""
+      };
       this.assistant = this.clearModel();
     } else {
       value.id = this.assistant.id;
       value.hospitals = this.assistant.hospitals
-      this.hospital = null;
+      this.hospital = {
+        id: "",
+        name: "",
+        cep: "",
+        state: "",
+        city: "",
+        neighborhood: "",
+        address: "",
+        numeral: null,
+        complement: ""
+      };
       this.assistantsService.updateAssistant(value.id, value);
 
       this.clearState();
@@ -185,10 +214,21 @@ export class AddAssistantComponent implements OnInit, OnDestroy {
 
 addHospital(hospital: string){
 
+  if(hospital != "" && hospital ){
   if(!this.assistant.hospitals.includes(hospital))
   this.assistant.hospitals.push(hospital);
-  this.hospital = null;
-
+  this.hospital = {
+    id: "",
+    name: "",
+    cep: "",
+    state: "",
+    city: "",
+    neighborhood: "",
+    address: "",
+    numeral: null,
+    complement: ""
+  };
+  }
 }
 
 removeHospital(hospital: string){

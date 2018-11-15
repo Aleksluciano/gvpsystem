@@ -4,7 +4,8 @@ export class MaskPhones {
 
   }
 
-onKeyPressMobilePhone(event: any) {
+onKeyPressMobilePhone(event: any, property: string = 'mobilePhone') {
+  console.log(property);
   const pattern = /[0-9\+\-\ ]/;
   let inputChar = String.fromCharCode(event.charCode);
 
@@ -15,24 +16,25 @@ onKeyPressMobilePhone(event: any) {
     event.preventDefault();
   }
 
-  let substr = this.obj['mobilePhone'].substring(0, 1);
-  let oldString = this.obj['mobilePhone'];
-  let lengthString = this.obj['mobilePhone'].length;
+  let substr = this.obj[property].substring(0, 1);
+  let oldString = this.obj[property];
+  let lengthString = this.obj[property].length;
 
   if (substr == "(" && lengthString == 3)
-  this.obj['mobilePhone'] = oldString + ") ";
+  this.obj[property] = oldString + ") ";
   else if (substr != "(" && lengthString == 2) {
-    this.obj['mobilePhone'] = "(" + oldString + ") ";
+    this.obj[property] = "(" + oldString + ") ";
   }
 
   if (lengthString == 10) {
-    this.obj['mobilePhone'] = this.obj['mobilePhone'] + "-";
+    this.obj[property] = this.obj[property] + "-";
   }
 
 
 }
 
-onKeyPressPhone(event: any) {
+onKeyPressPhone(event: any, property: string = 'phone') {
+  console.log(property);
   const pattern = /[0-9\+\-\ ]/;
   let inputChar = String.fromCharCode(event.charCode);
 
@@ -43,17 +45,17 @@ onKeyPressPhone(event: any) {
     event.preventDefault();
   }
 
-  let substr = this.obj['phone'].substring(0, 1);
-  let oldString = this.obj['phone'];
-  let lengthString = this.obj['phone'].length;
+  let substr = this.obj[property].substring(0, 1);
+  let oldString = this.obj[property];
+  let lengthString = this.obj[property].length;
 
-  if (substr == "(" && lengthString == 3) this.obj['phone'] = oldString + ") ";
+  if (substr == "(" && lengthString == 3) this.obj[property] = oldString + ") ";
   else if (substr != "(" && lengthString == 2) {
-    this.obj['phone'] = "(" + oldString + ") ";
+    this.obj[property] = "(" + oldString + ") ";
   }
 
   if (lengthString == 9) {
-    this.obj['phone'] = this.obj['phone'] + "-";
+    this.obj[property] = this.obj[property] + "-";
   }
 
 

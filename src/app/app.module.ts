@@ -8,8 +8,9 @@ import {MatDialogModule} from "@angular/material";
 
 
 import { FlashMessagesModule } from 'angular2-flash-messages';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
-import { UsersModule } from './components/users/users.module';
+import { UsersModule} from './components/users/users.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -38,7 +39,8 @@ import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.
     FlashMessagesModule.forRoot(),
     BrowserModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    NgbModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}],
   bootstrap: [AppComponent],

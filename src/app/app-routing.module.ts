@@ -17,6 +17,7 @@ const routes: Routes = [
   {path: "hospitals", loadChildren: "./components/hospitals/hospitals.module#HospitalsModule"},
   {path: "accommodations", loadChildren: "./components/accommodations/accommodations.module#AccommodationsModule"},
   {path: "assistants", loadChildren: "./components/social-assistants/assistants.module#AssistantsModule"},
+  {path: "patients", loadChildren: "./components/patients/patients.module#PatientsModule"},
 ]
 
 @NgModule({

@@ -1,0 +1,544 @@
+<div class="row">
+  <div class="col-md-6">
+    <a routerLink="/patients" class="btn btn-link">
+      <i class="fa fa-arrow-circle-o-left"></i> Voltar
+    </a>
+  </div>
+</div>
+
+<div class="card" @fade>
+  <div class="card-header">
+    Atualizar Paciente
+  </div>
+  <div class="card-body">
+      <br>
+      <h6 class="card-subtitle mb-2 text-muted">Dados pessoais</h6>
+
+    <form #patientForm="ngForm" (ngSubmit)="onSubmit(patientForm)">
+
+
+      <div class="row">
+        <div class="col-md-6">
+
+          <div class="form-group">
+            <label for="firstName">Nome *</label>
+            <input
+            type="text"
+            class="form-control"
+            #firstNameRef
+            name="firstName"
+            #firstNameModel="ngModel"
+            [ngClass]="{'is-invalid':firstNameModel.errors && firstNameModel.touched}"
+            [ngModel]="patient.firstName"
+            (ngModelChange)="patient.firstName = $event"
+            minlength="3"
+            autofocus
+            required>
+
+            <div [hidden]="!firstNameModel.errors?.required" class="invalid-feedback">
+              Nome requerido
+            </div>
+
+            <div [hidden]="!firstNameModel.errors?.minlength" class="invalid-feedback">
+              Deve ter pelo menos 3 caracteres
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="lastName">Sobrenome *</label>
+            <input
+            type="text"
+            class="form-control"
+            name="lastName"
+            #lastNameModel="ngModel"
+            [ngClass]="{'is-invalid':lastNameModel.errors && lastNameModel.touched}"
+            [ngModel]="patient.lastName"
+            (ngModelChange)="patient.lastName = $event"
+            minlength="2"
+            required>
+
+            <div [hidden]="!lastNameModel.errors?.required" class="invalid-feedback">
+              Sobrenome requerido
+            </div>
+
+            <div [hidden]="!lastNameModel.errors?.minlength" class="invalid-feedback">
+              Deve ter pelo menos 3 caracteres
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="row">
+
+
+            <div class="col-md-4">
+                <div class="form-group">
+                  <label for="mobilePhone">Telefone celular</label>
+                  <input
+                  type="text"
+                  class="form-control"
+                  name="mobilePhone"
+                  #mobilePhoneModel="ngModel"
+                  [ngClass]="{'is-invalid':mobilePhoneModel.errors && mobilePhoneModel.touched}"
+                  [(ngModel)]="patient.mobilePhone"
+                  (keypress)="maskPhones.onKeyPressMobilePhone($event)"
+                  minlength="15"
+                  maxlength="15"
+                  placeholder="Ex.: (00) 00000-0000"
+                  >
+
+                  <div [hidden]="!mobilePhoneModel.errors?.minlength" class="invalid-feedback">
+                      Formato incorreto
+                    </div>
+
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="phone">Telefone Residencial</label>
+                    <input
+                    type="text"
+                    class="form-control"
+                    name="phone"
+                    #phoneModel="ngModel"
+                    [ngClass]="{'is-invalid':phoneModel.errors && phoneModel.touched}"
+                    [(ngModel)]="patient.phone"
+                    (keypress)="maskPhones.onKeyPressPhone($event)"
+                    minlength="14"
+                    maxlength="14"
+                    placeholder="Ex.: (00) 0000-0000"
+                    >
+
+                    <div [hidden]="!phoneModel.errors?.minlength" class="invalid-feedback">
+                        Formato incorreto
+                      </div>
+
+                  </div>
+                </div>
+      </div>
+
+      <div class="row">
+
+<div class="col-md-2">
+  <br><br>
+  <h6 class="card-subtitle mb-2 text-muted">Endereço</h6>
+
+</div>
+</div>
+
+      <div class="row">
+
+       <div class="col-md-2">
+          <div class="form-group">
+
+              <label for="cep">CEP</label>
+              <div class="input-group">
+              <input
+              type="text"
+              class="form-control"
+              name="cep"
+              #cepModel="ngModel"
+              [ngClass]="{'is-invalid':cepModel.errors && cepModel.touched}"
+              [(ngModel)]="patient.cep"
+              >
+              <span class="input-group-btn">
+
+                  <button id="cepButton" type="button" class="btn btn-info" (click)="searchCep()">
+                      <i class="fa fa-search" aria-hidden="true"></i>
+                   </button>
+               </span>
+              </div>
+            </div>
+
+          </div>
+
+            <div class="col-md-2">
+                 <div class="form-group">
+                     <label for="state">Estado</label>
+                     <input
+                     type="text"
+                     class="form-control"
+                     name="state"
+                     #stateModel="ngModel"
+                     [ngClass]="{'is-invalid':stateModel.errors && stateModel.touched}"
+                     [(ngModel)]="patient.state"
+                     maxlength="2"
+
+                     >
+
+                   </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="city">Cidade</label>
+                        <input
+                        type="text"
+                        class="form-control"
+                        name="city"
+                        #cityModel="ngModel"
+                        [ngClass]="{'is-invalid':cityModel.errors && cityModel.touched}"
+                        [(ngModel)]="patient.city"
+
+                        >
+
+                      </div>
+                   </div>
+
+                   <div class="col-md-3">
+                      <div class="form-group">
+                          <label for="neighborhood">Bairro</label>
+                          <input
+                          type="text"
+                          class="form-control"
+                          name="neighborhood"
+                          #neighborhoodModel="ngModel"
+                          [ngClass]="{'is-invalid':neighborhoodModel.errors && neighborhoodModel.touched}"
+                          [(ngModel)]="patient.neighborhood"
+                          >
+
+                        </div>
+                     </div>
+
+                     <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="address">Logradouro (Rua, Avenida, etc)</label>
+                            <input
+                            type="text"
+                            class="form-control"
+                            name="address"
+                            #addressModel="ngModel"
+                            [ngClass]="{'is-invalid':addressModel.errors && addressModel.touched}"
+                            [(ngModel)]="patient.address"
+                            >
+
+                          </div>
+                       </div>
+
+                       <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="numeral">Número</label>
+                            <input
+                            type="number"
+                            class="form-control"
+                            name="numeral"
+                            #numeralModel="ngModel"
+                            [ngClass]="{'is-invalid':numeralModel.errors && numeralModel.touched}"
+                            [(ngModel)]="patient.numeral"
+                            >
+
+                          </div>
+                       </div>
+                       <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="numeral">Complemento</label>
+                            <input
+                            type="text"
+                            class="form-control"
+                            name="complement"
+                            #complementModel="ngModel"
+                            [ngClass]="{'is-invalid':
+                            complementModel.errors &&
+                            complementModel.touched}"
+                            [(ngModel)]="patient.complement"
+                            >
+
+                          </div>
+                       </div>
+
+      </div>
+
+
+        <div class="row">
+
+            <div class="col-md-3">
+              <br><br>
+              <h6 class="card-subtitle mb-2 text-muted">Informações Adicionais</h6>
+
+            </div>
+            </div>
+
+            <div class="row">
+            <div class="form-group" class="col-md-3" id="sel">
+
+                <label for="congregation">Congregação *</label>
+                <select #patientCongregationModel="ngModel" type="text" [(ngModel)]="congregation" class="form-control" name='congregation' [ngClass]="{'is-invalid':patientCongregationModel.errors &&
+                  patientCongregationModel.touched}"
+                  required>
+                  <option> </option>
+                  <option *ngFor="let cong of congregations" [ngValue]="cong">{{ cong?.name }}</option>
+                </select>
+
+                <div [hidden]="!patientCongregationModel.errors?.required" class="invalid-feedback">
+                  Congregação requerida
+                </div>
+
+              </div>
+
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="email">Email </label>
+          <input
+          type="email"
+          class="form-control"
+          name="email"
+          #emailModel="ngModel"
+          [ngClass]="{'is-invalid':emailModel.errors && emailModel.touched}"
+          [(ngModel)]="patient.email"
+          pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+          placeholder="Ex.: paciente@dominio.com"
+          >
+
+        </div>
+      </div>
+
+
+    </div>
+    <div class="row">
+
+      <div class="col-md-3">
+        <br><br>
+        <h6 class="card-subtitle mb-2 text-muted">Contato dos Anciãos locais</h6>
+
+      </div>
+      </div>
+
+    <div class="row">
+
+
+      <div class="col-md-2">
+          <div class="form-group">
+            <label for="mobileElder1">Celular Ancião 1</label>
+            <input
+            type="text"
+            class="form-control"
+            name="mobileElder1"
+            #mobileElder1Model="ngModel"
+            [ngClass]="{'is-invalid':mobileElder1Model.errors && mobileElder1Model.touched}"
+            [(ngModel)]="patient.mobileElder1"
+            (keypress)="maskPhones.onKeyPressMobilePhone($event,'mobileElder1')"
+            minlength="15"
+            maxlength="15"
+            placeholder="(00) 00000-0000"
+            >
+
+            <div [hidden]="!mobileElder1Model.errors?.minlength" class="invalid-feedback">
+                Formato incorreto
+              </div>
+
+          </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+              <label for="phoneElder1">Telefone Ancião 1</label>
+              <input
+              type="text"
+              class="form-control"
+              name="phoneElder1"
+              #phoneElder1Model="ngModel"
+              [ngClass]="{'is-invalid':phoneElder1Model.errors && phoneElder1Model.touched}"
+              [(ngModel)]="patient.phoneElder1"
+              (keypress)="maskPhones.onKeyPressPhone($event, 'phoneElder1')"
+              minlength="14"
+              maxlength="14"
+              placeholder="(00) 0000-0000"
+              >
+
+              <div [hidden]="!phoneElder1Model.errors?.minlength" class="invalid-feedback">
+                  Formato incorreto
+                </div>
+
+            </div>
+          </div>
+
+
+
+
+
+  <div class="col-md-2">
+      <div class="form-group">
+        <label for="mobileElder2">Celular Ancião 2</label>
+        <input
+        type="text"
+        class="form-control"
+        name="mobileElder2"
+        #mobileElder2Model="ngModel"
+        [ngClass]="{'is-invalid':mobileElder2Model.errors && mobileElder2Model.touched}"
+        [(ngModel)]="patient.mobileElder2"
+        (keypress)="maskPhones.onKeyPressMobilePhone($event, 'mobileElder2')"
+        minlength="15"
+        maxlength="15"
+        placeholder="(00) 00000-0000"
+        >
+
+        <div [hidden]="!mobileElder2Model.errors?.minlength" class="invalid-feedback">
+            Formato incorreto
+          </div>
+
+      </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="form-group">
+          <label for="phoneElder2">Telefone Ancião 2</label>
+          <input
+          type="text"
+          class="form-control"
+          name="phoneElder2"
+          #phoneElder2Model="ngModel"
+          [ngClass]="{'is-invalid':phoneElder2Model.errors && phoneElder2Model.touched}"
+          [(ngModel)]="patient.phoneElder2"
+          (keypress)="maskPhones.onKeyPressPhone($event, 'phoneElder2')"
+          minlength="14"
+          maxlength="14"
+          placeholder="(00) 0000-0000"
+          >
+
+          <div [hidden]="!phoneElder2Model.errors?.minlength" class="invalid-feedback">
+              Formato incorreto
+            </div>
+
+        </div>
+      </div>
+</div>
+<div class="row">
+<div class="col-md-3">
+<br><br>
+<h6 class="card-subtitle mb-2 text-muted">Descrição do caso</h6>
+
+</div>
+</div>
+
+<div class="container" id="divEditor">
+<br>
+<angular-editor
+id="myEditor" name="caseDescription"  [(ngModel)]="patient.caseDescription"   [config]="config"></angular-editor>
+<br>
+</div>
+
+<div class="row">
+<div class="col-md-3">
+  <br><br>
+  <h6 class="card-subtitle mb-2 text-muted">Dados de internação</h6>
+
+</div>
+</div>
+
+<div class="row">
+<div class="form-group" class="col-md-3" >
+
+    <label for="hospital">Hospital internado *</label>
+    <select #patientHospitalModel="ngModel" type="text" [(ngModel)]="hospital" class="form-control" name="hospital" [ngClass]="{'is-invalid':patientHospitalModel.errors &&
+      patientHospitalModel.touched}"
+      required>
+      <option> </option>
+      <option *ngFor="let hosp of hospitals" [ngValue]="hosp">{{ hosp?.name }}</option>
+    </select>
+
+    <div [hidden]="!patientHospitalModel.errors?.required" class="invalid-feedback">
+      Hospital requerido
+    </div>
+
+  </div>
+
+  <div class="col-md-3">
+    <div class="form-group">
+      <label for="hospitalizationDate">Data de internação</label>
+      <input
+      type="date"
+      class="form-control"
+      name="hospitalizationDate"
+      #hospitalizationDateModel="ngModel"
+      [ngClass]="{'is-invalid':hospitalizationDateModel.errors && hospitalizationDateModel.touched}"
+      [ngModel]="patient.hospitalizationDate | date:'yyyy-MM-dd'"
+      (ngMoelChange)="patient.hospitalizationDate = $event"
+      required
+      >
+
+      <div [hidden]="!hospitalizationDateModel.errors?.required" class="invalid-feedback">
+          Formato incorreto
+        </div>
+
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="form-group">
+      <label for="medicalRelease">Data de alta médica</label>
+      <input
+      type="date"
+      class="form-control"
+      name="medicalRelease"
+      #medicalReleaseModel="ngModel"
+      [ngClass]="{'is-invalid':medicalReleaseModel.errors && medicalReleaseModel.touched}"
+      [ngModel]="patient.medicalRelease | date:'yyyy-MM-dd'"
+      (ngMoelChange)="patient.medicalRelease = $event"
+      required
+      >
+
+      <div [hidden]="!medicalReleaseModel.errors?.required" class="invalid-feedback">
+          Formato incorreto
+        </div>
+
+    </div>
+  </div>
+
+
+  <div class="form-group" class="col-md-3" >
+
+    <label for="accommodation">Hospedagem *</label>
+    <select #patientAccommodationModel="ngModel" type="text" [(ngModel)]="accommodation" class="form-control" name='accommodation' [ngClass]="{'is-invalid':patientAccommodationModel.errors &&
+      patientAccommodationModel.touched}"
+      required>
+      <option> </option>
+      <option *ngFor="let accom of accommodations" [ngValue]="accom">{{ accom?.name }}</option>
+    </select>
+
+    <div [hidden]="!patientAccommodationModel.errors?.required" class="invalid-feedback">
+      Hospedagem requerida
+    </div>
+
+  </div>
+
+</div>
+
+<div class="row">
+<br>
+<div class="col-md-6">
+    <div class="form-group">
+
+     <label>Quem informou?</label><br>
+    <label class="radio-inline">
+        <input type="radio"  name="infoWho" value="Gvp" id="Gvp" [(ngModel)]="patient.infoWho" > Gvp
+      </label>&nbsp;&nbsp;
+      <label class="radio-inline">
+        <input type="radio"  name="infoWho" value="Colih" id="Colih" [(ngModel)]="patient.infoWho"> Colih
+      </label>&nbsp;&nbsp;
+      <label class="radio-inline">
+          <input type="radio" name="infoWho" value="Outros" id="Outros" [(ngModel)]="patient.infoWho"> Outros
+        </label>
+      </div>
+</div>
+</div>
+
+
+
+
+
+<br><br>
+
+      <input type="submit" value="Criar" class="btn btn-primary btn-block">
+
+    </form>
+
+  </div>
+</div>
+
+

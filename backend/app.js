@@ -1,4 +1,5 @@
-//const path = require("path");
+const path = require("path");
+const cors = require('cors');
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -9,6 +10,7 @@ const congregationsRoutes = require("./routes/congregations");
 const hospitalsRoutes = require("./routes/hospitals");
 const accommodationsRoutes = require("./routes/accommodations");
 const assistantsRoutes = require("./routes/assistants");
+const patientsRoutes = require("./routes/patients");
 //const config = require('./config/default.json');
 
 const app = express();
@@ -29,7 +31,8 @@ mongoose
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-// app.use("/images", express.static(path.join(__dirname, "images")));
+app.options('*', cors()); // include before other routes
+app.use("/images", express.static(path.join("images")));
 // app.use("/", express.static(path.join(__dirname, "angular")));
 
 app.use((req, res, next) => {
@@ -51,6 +54,7 @@ app.use("/api/congregations", congregationsRoutes);
 app.use("/api/hospitals", hospitalsRoutes);
 app.use("/api/accommodations", accommodationsRoutes);
 app.use("/api/assistants", assistantsRoutes);
+app.use("/api/patients", patientsRoutes);
 
 // app.use((req, res, next) => {
 //   res.sendFile(path.join(__dirname, "angular", "index.html"));

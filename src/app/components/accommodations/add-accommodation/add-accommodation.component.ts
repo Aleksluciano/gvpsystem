@@ -146,7 +146,6 @@ export class AddAccommodationComponent implements OnInit, OnDestroy {
       this.accommodation = this.clearModel();
     } else {
       value.id = this.accommodation.id;
-
       this.accommodationsService.updateAccommodation(value.id, value);
 
       this.clearState();

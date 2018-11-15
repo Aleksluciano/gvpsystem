@@ -28,12 +28,12 @@
              <div class="input-group">
             <select  #userHospital="ngModel" type="text" [(ngModel)]="hospital" class="form-control" name='hospital' [ngClass]="{'is-invalid':userHospital.errors &&
               userHospital.touched}">
-              <option > </option>
+              <option></option>
               <option *ngFor="let hosp of hospitals" [ngValue]="hosp" >{{ hosp?.name }}</option>
             </select>
             <span class="input-group-btn" >
 
-                <button  id="addHospital" type="button" class="btn btn-info" (click)="addHospital(hospital.name)">
+                <button  id="addHospital" type="button" class="btn btn-info" (click)="addHospital(hospital?.name)">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                  </button>
              </span>
@@ -126,7 +126,7 @@
       <hr>
       <div class="row">
         <ul class="list-group col-md-6">
-            <li class="list-group-item"><strong class="Topic">Hospitais que trabalha:</strong> {{ assistant.hospitals.toString()}} </li>
+            <li class="list-group-item"><strong class="Topic">Hospitais que trabalha:</strong> {{ assistant.hospitals.join(', ')}} </li>
             <li class="list-group-item"><strong class="Topic">Celular:</strong> {{ assistant.mobilePhone }}</li>
              <li class="list-group-item"><strong class="Topic">Telefone:</strong> {{ assistant.phone }}</li>
            </ul>
