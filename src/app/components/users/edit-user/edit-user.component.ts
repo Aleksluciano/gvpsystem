@@ -77,7 +77,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
         timeout: 4000
       });
     } else {
-      console.log(value);
+
       // Update User
       value.congregation = this.congregation.name;
       value.id = this.id;
@@ -95,11 +95,11 @@ export class EditUserComponent implements OnInit, OnDestroy {
         this.user.city = endereco.localidade;
         this.user.neighborhood = endereco.bairro;
         this.user.address = endereco.logradouro;
-        console.log(endereco);
+        
       })
       .catch(error => {
         // Alguma coisa deu errado :/
-        console.log(error.message);
+    
         this.dialog.open(InfoModalComponent, {
           data: { title: "Erro", message: error.message }
         });
@@ -107,7 +107,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
       });
   }
 
-  
+
   ngOnDestroy() {
     this.congregationsSub.unsubscribe();
   }

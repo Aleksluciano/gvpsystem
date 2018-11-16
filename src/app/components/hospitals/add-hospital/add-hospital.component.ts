@@ -143,14 +143,14 @@ export class AddHospitalComponent implements OnInit, OnDestroy {
         this.hospital.city = endereco.localidade;
         this.hospital.neighborhood = endereco.bairro;
         this.hospital.address = endereco.logradouro;
-        console.log(endereco);
+
       })
       .catch(error => {
         // Alguma coisa deu errado :/
         this.dialog.open(InfoModalComponent, {
           data: { title: "Erro", message: error.message }
         });
-        console.log(error.message);
+
       });
   }
 

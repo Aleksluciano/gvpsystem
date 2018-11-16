@@ -28,3 +28,14 @@ thead{
   background-color: rgb(35, 196, 236);
 
 }
+
+td{
+  word-break:break-all
+}
+
+
+@media screen and (max-width: 480px) {
+  .colhide{
+    display: none;
+  }
+}

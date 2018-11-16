@@ -103,7 +103,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
       });
       window.scrollTo(0, 0);
     } else {
-      console.log(value);
+
       // Add new client
       value.congregation = this.congregation.name;
       this.usersService.createUser(value);
@@ -119,10 +119,10 @@ export class AddUserComponent implements OnInit, OnDestroy {
       this.user.city = endereco.localidade;
       this.user.neighborhood = endereco.bairro;
       this.user.address = endereco.logradouro;
-      console.log(endereco);
+
      }).catch( (error ) => {
       //outro teste
-      console.log(error.message);
+
       this.dialog.open(InfoModalComponent, {
         data: { title: "Erro", message: error.message }
       });

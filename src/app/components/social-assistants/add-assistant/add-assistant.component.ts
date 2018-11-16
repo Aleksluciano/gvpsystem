@@ -143,7 +143,7 @@ export class AddAssistantComponent implements OnInit, OnDestroy {
   }
 
   onSubmit({ value, valid }: { value: Assistant; valid: boolean }) {
-    console.log(value,valid);
+
     if (!valid) {
     } else if (this.isNew) {
 

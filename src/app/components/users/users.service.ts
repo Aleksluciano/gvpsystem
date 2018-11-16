@@ -106,7 +106,7 @@ export class UsersService {
           if (a.firstName > b.firstName ) return 1;
           return 0;
         });
-        
+
         this.usersUpdated.next([...this.users]);
       });
   }

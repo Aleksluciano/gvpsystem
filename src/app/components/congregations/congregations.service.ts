@@ -77,6 +77,7 @@ export class CongregationsService {
   }
 
   get Congregations() {
+
     return this.congregations || [];
   }
 

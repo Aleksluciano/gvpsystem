@@ -91,6 +91,7 @@ export class HospitalsService {
   }
 
   get Hospitals() {
+
     return this.hospitals || [];
   }
 

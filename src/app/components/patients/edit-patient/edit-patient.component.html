@@ -29,7 +29,7 @@
             name="firstName"
             #firstNameModel="ngModel"
             [ngClass]="{'is-invalid':firstNameModel.errors && firstNameModel.touched}"
-            [ngModel]="patient.firstName"
+            [ngModel]="patient?.firstName"
             (ngModelChange)="patient.firstName = $event"
             minlength="3"
             autofocus
@@ -534,7 +534,7 @@ id="myEditor" name="caseDescription"  [(ngModel)]="patient.caseDescription"   [c
 
 <br><br>
 
-      <input type="submit" value="Criar" class="btn btn-primary btn-block">
+      <input type="submit" value="Salvar" class="btn btn-primary btn-block">
 
     </form>
 

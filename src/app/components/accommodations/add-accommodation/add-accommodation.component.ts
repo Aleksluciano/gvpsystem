@@ -138,7 +138,7 @@ export class AddAccommodationComponent implements OnInit, OnDestroy {
   }
 
   onSubmit({ value, valid }: { value: Accommodation; valid: boolean }) {
-    console.log(value,valid);
+
     if (!valid) {
     } else if (this.isNew) {
       this.accommodationsService.createAccommodation(value);
@@ -164,14 +164,14 @@ export class AddAccommodationComponent implements OnInit, OnDestroy {
         this.accommodation.city = endereco.localidade;
         this.accommodation.neighborhood = endereco.bairro;
         this.accommodation.address = endereco.logradouro;
-        console.log(endereco);
+
       })
       .catch(error => {
         // Alguma coisa deu errado :/
         this.dialog.open(InfoModalComponent, {
           data: { title: "Erro", message: error.message }
         });
-        console.log(error.message);
+
       });
   }
 

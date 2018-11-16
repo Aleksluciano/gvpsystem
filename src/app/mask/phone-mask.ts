@@ -5,7 +5,7 @@ export class MaskPhones {
   }
 
 onKeyPressMobilePhone(event: any, property: string = 'mobilePhone') {
-  console.log(property);
+
   const pattern = /[0-9\+\-\ ]/;
   let inputChar = String.fromCharCode(event.charCode);
 
@@ -34,7 +34,7 @@ onKeyPressMobilePhone(event: any, property: string = 'mobilePhone') {
 }
 
 onKeyPressPhone(event: any, property: string = 'phone') {
-  console.log(property);
+ 
   const pattern = /[0-9\+\-\ ]/;
   let inputChar = String.fromCharCode(event.charCode);
 

@@ -5,11 +5,11 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse"  id="appNavigation" [ngbCollapse]="isCollapsed">
+    <div class="collapse navbar-collapse"  id="appNavigation" [ngbCollapse]="isCollapsed" >
 
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav mr-auto" >
         <li class="nav-item">
-          <a routerLink="/"  class="nav-link">GVP's</a>
+          <a routerLink="/"  class="nav-link" (click)="toggleMenu()">GVP's</a>
         </li>
         <li class="nav-item">
           <a routerLink="/congregations"  class="nav-link" (click)="toggleMenu()">Congregações</a>

@@ -74,7 +74,8 @@ exports.updatePatient = async (req, res, next) => {
 
   if (updatedPatient.n > 0) {
     res.status(200).json({
-      message: "Update successful!"
+      message: "Update successful!",
+      obj: updatedPatient
     });
   } else {
     res.status(401).json({
@@ -89,10 +90,10 @@ exports.updatePatient = async (req, res, next) => {
 
 exports.getPatients = async (req, res, next) => {
 
-  const fetchedPatients = await Patient.find()
-                                       .populate('hospital')
-                                       .populate('accommodation')
-                                       .exec();
+  const fetchedPatients = await Patient.find();
+                                      //  .populate('hospital')
+                                      //  .populate('accommodation')
+                                      //  .exec();
 
   res.status(200).json({
     message: "Patients fetched successfully!",

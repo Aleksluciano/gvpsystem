@@ -36,18 +36,18 @@
       <thead class="thead">
         <tr>
           <th>Nome</th>
-          <th>Email</th>
-          <th>Celular</th>
-          <th>Congregação</th>
+          <th class="colhide">Email</th>
+          <th class="colhide">Celular</th>
+          <th class="colhide">Congregação</th>
           <th colspan="3" id="actions">Ações</th>
         </tr>
       </thead>
       <tbody @fade>
         <tr *ngFor="let user of  users | filter: filteredName : 'firstName' : 'lastName' | filter: filteredEmail: 'email'">
           <td><a routerLink="user/{{ user.id }}">{{ user.firstName }} {{ user.lastName }}</a></td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.mobilePhone }}</td>
-          <td>{{ user.congregation }}</td>
+          <td class="colhide">{{ user.email }}</td>
+          <td class="colhide">{{ user.mobilePhone }}</td>
+          <td class="colhide">{{ user.congregation }}</td>
         <td><button id="eyeButton" routerLink="/user/{{ user.id }}"><i class="fa fa-eye" aria-hidden="true"></i></button></td>
         <td><button id="editButton" routerLink="/user/edit/{{ user.id }}"><i class="fa fa-edit" aria-hidden="true"></i></button></td>
         <td><button id="deleteButton" (click)="onDeleteClick(user.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>

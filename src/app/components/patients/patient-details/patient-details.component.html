@@ -6,7 +6,7 @@
   </div>
   <div class="col md-6">
     <div class="btn-group pull-right">
-      <a routerLink="edit/{{ id }}" class="btn btn-warning">
+      <a routerLink="/patients/edit/{{ id }}" class="btn btn-warning">
         Editar
       </a>
       <button (click)="onDeleteClick()" class="btn btn-danger">Deletar</button>
@@ -15,35 +15,56 @@
 </div>
 <hr>
 <div *ngIf="patient" class="card" @fade>
-  <h3 class="card-header">{{ patient.firstName }} {{ patient.lastName }}</h3>
+  <h3 class="card-header">Paciente: {{ patient.firstName }} {{ patient.lastName }}</h3>
   <div class="card-body">
     <div class="row">
       <div class="col-md-12 col-sm-6">
         <h4> ID: {{ patient.id }}</h4>
       </div>
-  </div>
+    </div>
     <hr>
     <div class="row">
-    <ul class="list-group col-md-4">
-       <li class="list-group-item"><strong class="Topic">Email:</strong> {{ patient.email }}</li>
-       <li class="list-group-item"><strong class="Topic">Celular:</strong> {{ patient.mobilePhone }}</li>
-       <li class="list-group-item"><strong class="Topic">Telefone:</strong> {{ patient.phone }}</li>
-       <li class="list-group-item"><strong class="Topic">Congregação:</strong> {{ patient.congregation }}</li>
+      <ul class="list-group col-md-4">
+        <li class="list-group-item"><strong class="Topic">Email:</strong> {{ patient.email }}</li>
+        <li class="list-group-item"><strong class="Topic">Celular:</strong> {{ patient.mobilePhone }}</li>
+        <li class="list-group-item"><strong class="Topic">Telefone:</strong> {{ patient.phone }}</li>
+        <li class="list-group-item"><strong class="Topic">Congregação:</strong> {{ patient.congregation }}</li>
+        <li class="list-group-item"><strong class="Topic">Hospital:</strong> {{ hospital?.name }}</li>
+        <li class="list-group-item"><strong class="Topic">Data de internação:</strong> {{ patient.hospitalizationDate |
+          date:'dd-MM-yyyy'}}</li>
+        <li class="list-group-item"><strong class="Topic">Data de alta médica:</strong> {{ patient.medicalRelease |
+          date:'dd-MM-yyyy' }}</li>
       </ul>
       <ul class="list-group col-md-4">
-       <li class="list-group-item"><strong class="Topic">Estado:</strong> {{ patient.state }}</li>
-       <li class="list-group-item"><strong class="Topic">Cidade:</strong> {{ patient.city }}</li>
-       <li class="list-group-item"><strong class="Topic">Bairro:</strong> {{ patient.neighborhood }}</li>
-       <li class="list-group-item"><strong class="Topic">Logradouro:</strong> {{ patient.address }}</li>
-       <li class="list-group-item"><strong class="Topic">Número:</strong> {{ patient.numeral }}</li>
-       <li class="list-group-item"><strong class="Topic">Complemento:</strong> {{ patient.complement }}</li>
-    </ul>
-    <ul class="list-group col-md-4">
+        <li class="list-group-item"><strong class="Topic">Hospedagem:</strong> {{ accommodation?.name }}</li>
+        <li class="list-group-item"><strong class="Topic">Celular Ancião 1:</strong> {{ patient.mobileElder1 }}</li>
+        <li class="list-group-item"><strong class="Topic">Celular Ancião 2:</strong> {{ patient.mobileElder2 }}</li>
+        <li class="list-group-item"><strong class="Topic">Telefone Ancião 1:</strong> {{ patient.phoneElder1 }}</li>
+        <li class="list-group-item"><strong class="Topic">Telefone Ancião 2:</strong> {{ patient.phoneElder2 }}</li>
+        <li class="list-group-item"><strong class="Topic">Estado:</strong> {{ patient.state }}</li>
+        <li class="list-group-item"><strong class="Topic">Cidade:</strong> {{ patient.city }}</li>
+      </ul>
+      <ul class="list-group col-md-4">
+        <li class="list-group-item"><strong class="Topic">Bairro:</strong> {{ patient.neighborhood }}</li>
+        <li class="list-group-item"><strong class="Topic">Logradouro:</strong> {{ patient.address }}</li>
+        <li class="list-group-item"><strong class="Topic">Número:</strong> {{ patient.numeral }}</li>
+        <li class="list-group-item"><strong class="Topic">Complemento:</strong> {{ patient.complement }}</li>
         <li class="list-group-item"><strong class="Topic">Cep:</strong> {{ patient.cep }}</li>
       </ul>
-  </div>
+
+    </div>
   </div>
 </div>
+<div *ngIf="patient" class="card" @fade>
+  <h4 class="card-header">Descrição do caso</h4>
+  <div class="card-body">
+    <div class="row">
+      <div class="container" id="divEditor">
 
+        <angular-editor id="myEditor" name="caseDescription" [(ngModel)]="patient.caseDescription" [config]="config"></angular-editor>
+        <br>
+      </div>
 
-
+    </div>
+  </div>
+</div>

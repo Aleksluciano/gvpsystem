@@ -186,12 +186,12 @@ this.hospitalsSub = this.hospitalsService
       });
       window.scrollTo(0, 0);
     } else {
-      console.log(value);
+
       // Add new client
       value.congregation = this.congregation.name;
-      value.accommodation = this.congregation.id;
+      value.accommodation = this.accommodation.id;
       value.hospital = this.hospital.id;
-      console.log(value)
+
       this.patientsService.createPatient(value);
 
     }
@@ -205,10 +205,10 @@ this.hospitalsSub = this.hospitalsService
       this.patient.city = endereco.localidade;
       this.patient.neighborhood = endereco.bairro;
       this.patient.address = endereco.logradouro;
-      console.log(endereco);
+
      }).catch( (error ) => {
       //outro teste
-      console.log(error.message);
+
       this.dialog.open(InfoModalComponent, {
         data: { title: "Erro", message: error.message }
       });
