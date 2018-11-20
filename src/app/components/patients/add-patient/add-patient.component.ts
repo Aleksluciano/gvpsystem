@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef, HostBinding } from
 import { trigger, transition, style, animate } from "@angular/animations";
 import { FlashMessagesService } from "angular2-flash-messages";
 import { Subscription } from 'rxjs';
+import { Location } from "@angular/common";
 
 import { NgxViacepService } from '@brunoc/ngx-viacep';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
@@ -73,6 +74,7 @@ export class AddPatientComponent implements OnInit, OnDestroy {
     complement: ""
   };
 
+  patients: Patient[] = [];
   patientsSub: Subscription;
   patient: Patient = {
     id: "",
@@ -130,10 +132,13 @@ export class AddPatientComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private hospitalsService: HospitalsService,
     private accommodationsService: AccommodationsService,
+    private location: Location
   ) {}
 
   ngOnInit() {
 
+    this.patients = this.patientsService.Patients;
+    if (this.patients.length <= 0)this.patientsService.getPatientsServer();
 
     this.patientsSub = this.patientsService
     .getPatientsUpdateListener()
@@ -264,7 +269,9 @@ this.hospitalsSub = this.hospitalsService
 
 
 
-
+  onBackClicked() {
+    this.location.back();
+  }
 
 
 }

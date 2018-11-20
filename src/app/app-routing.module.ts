@@ -1,3 +1,4 @@
+import { BeginComponent } from './components/begin/begin.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes} from '@angular/router'
 
@@ -9,10 +10,12 @@ import { ListUsersComponent } from './components/users/list-users/list-users.com
 
 const routes: Routes = [
 
-  {path: "", component: ListUsersComponent},
-  {path: "user/add", component: AddUserComponent},
-  {path: "user/edit/:id", component: EditUserComponent},
-  {path: "user/:id", component: UserDetailsComponent},
+  // {path: "", component: ListUsersComponent},
+  // {path: "user/add", component: AddUserComponent},
+  // {path: "user/edit/:id", component: EditUserComponent},
+  // {path: "user/:id", component: UserDetailsComponent},
+  {path: "", component: BeginComponent},
+  {path: "users", loadChildren: "./components/users/users.module#UsersModule"},
   {path: "congregations", loadChildren: "./components/congregations/congregations.module#CongregationsModule"},
   {path: "hospitals", loadChildren: "./components/hospitals/hospitals.module#HospitalsModule"},
   {path: "accommodations", loadChildren: "./components/accommodations/accommodations.module#AccommodationsModule"},

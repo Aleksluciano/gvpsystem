@@ -11,6 +11,7 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { FilterModule } from './../../pipes/filter.module';
+import { UsersRoutingModule } from './users-routing.module';
 
 
 
@@ -27,7 +28,8 @@ import { FilterModule } from './../../pipes/filter.module';
     FormsModule,
     NgxViacepModule,
     RouterModule,
-    FilterModule
+    FilterModule,
+    UsersRoutingModule
   ]
 })
 export class UsersModule { }

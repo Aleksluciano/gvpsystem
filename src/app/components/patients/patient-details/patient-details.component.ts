@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import { Location } from "@angular/common";
 
 import { PatientsService } from './../patients.service';
 import { Patient } from '../patient.model';
@@ -32,6 +32,8 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 })
 export class PatientDetailsComponent implements OnInit, OnDestroy {
   id: string;
+  showDetailsHospital = false;
+  showDetailsAccommodation = false;
   // patient: Patient;
 
   patientsSub: Subscription;
@@ -95,7 +97,8 @@ export class PatientDetailsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private hospitalsService: HospitalsService,
-    private accommodationsService: AccommodationsService
+    private accommodationsService: AccommodationsService,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -106,6 +109,12 @@ export class PatientDetailsComponent implements OnInit, OnDestroy {
       // Get client
 
       this.patient = this.patientsService.getPatient(this.id);
+
+      this.patientsSub = this.patientsService
+      .getPatientsUpdateListener()
+      .subscribe( ()  => {
+        this.router.navigate(["/patients"]);
+      });
 
          //get Hospital
     this.hospitals = this.hospitalsService.Hospitals;
@@ -144,24 +153,6 @@ export class PatientDetailsComponent implements OnInit, OnDestroy {
         );
       });
 
-      // let hospitalPromise = new Promise((resolve,reject)=>{
-      //   this.hospitals = this.hospitalsService.Hospitals;
-      //    resolve(this.hospitals);
-      // })
-
-      //  hospitalPromise.then((hospitals) =>{
-      // this.hospital = this.searchById(hospitals, this.patient.hospital);
-      //  })
-
-      //  let accommodationPromise = new Promise((resolve,reject)=>{
-      //    this.accommodations = this.accommodationsService.Accommodations;
-      //    resolve(this.accommodations);
-      //  })
-
-      //  accommodationPromise.then((accommodations) =>{
-      //   if (this.accommodations.length > 0)
-      // this.accommodation = this.searchById(accommodations, this.patient.accommodation);
-      //  })
 
   }
 
@@ -176,7 +167,7 @@ export class PatientDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-      // this.patientsSub.unsubscribe();
+      this.patientsSub.unsubscribe();
       this.accommodationsSub.unsubscribe();
       this.hospitalsSub.unsubscribe();
 
@@ -186,6 +177,10 @@ export class PatientDetailsComponent implements OnInit, OnDestroy {
   searchById(elements, id) {
     let el = elements.filter(c => c.id == id);
     return el[0];
+  }
+
+  onBackClicked() {
+    this.location.back();
   }
 
 }

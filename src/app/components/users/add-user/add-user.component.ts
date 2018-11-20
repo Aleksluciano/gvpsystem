@@ -1,6 +1,7 @@
 
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from "@angular/core";
 import { trigger, transition, style, animate } from "@angular/animations";
+import { Location } from "@angular/common"
 import { FlashMessagesService } from "angular2-flash-messages";
 import { Subscription } from 'rxjs';
 
@@ -38,7 +39,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
   congregation: Congregation = { id: "", name: ""};
 
 
-
+  users: User[] = [];
   user: User = {
     id: "",
     firstName: "",
@@ -66,12 +67,14 @@ export class AddUserComponent implements OnInit, OnDestroy {
     private usersService: UsersService,
     private congregationsService: CongregationsService,
     private viacep: NgxViacepService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private location: Location
   ) {}
 
   ngOnInit() {
 
-
+    this.users = this.usersService.Users;
+    if (this.users.length <= 0)this.usersService.getUsersServer();
 
     this.usersSub = this.usersService
     .getUsersUpdateListener()
@@ -165,6 +168,10 @@ export class AddUserComponent implements OnInit, OnDestroy {
 
     this.congregationsSub.unsubscribe();
     this.usersSub.unsubscribe();
+  }
+
+  onBackClicked() {
+    this.location.back();
   }
 
 

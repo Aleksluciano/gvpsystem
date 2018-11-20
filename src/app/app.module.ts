@@ -18,6 +18,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ErrorInterceptor } from './error-interceptor';
 import { ErrorComponent } from './error/error.component';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
+import { BeginComponent } from './components/begin/begin.component';
 
 
 
@@ -30,12 +31,12 @@ import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.
     NavbarComponent,
     ErrorComponent,
     ConfirmModalComponent,
-    InfoModalComponent
+    InfoModalComponent,
+    BeginComponent
   ],
   imports: [
     AppRoutingModule,
     HttpClientModule,
-    UsersModule,
     FlashMessagesModule.forRoot(),
     BrowserModule,
     BrowserAnimationsModule,

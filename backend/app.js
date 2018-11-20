@@ -4,7 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
-
+const beginRoutes = require("./routes/begin");
 const usersRoutes = require("./routes/users");
 const congregationsRoutes = require("./routes/congregations");
 const hospitalsRoutes = require("./routes/hospitals");
@@ -49,6 +49,7 @@ app.use((req, res, next) => {
 });
 
 // app.use("/api/posts", postsRoutes);
+app.use("/api/begin", beginRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/congregations", congregationsRoutes);
 app.use("/api/hospitals", hospitalsRoutes);

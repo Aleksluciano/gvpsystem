@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-6">
-    <a routerLink="/patients" class="btn btn-link">
+    <a [routerLink]="" (click)=onBackClicked() class="btn btn-link">
       <i class="fa fa-arrow-circle-o-left"></i> Voltar
     </a>
   </div>
@@ -29,14 +29,26 @@
         <li class="list-group-item"><strong class="Topic">Celular:</strong> {{ patient.mobilePhone }}</li>
         <li class="list-group-item"><strong class="Topic">Telefone:</strong> {{ patient.phone }}</li>
         <li class="list-group-item"><strong class="Topic">Congregação:</strong> {{ patient.congregation }}</li>
-        <li class="list-group-item"><strong class="Topic">Hospital:</strong> {{ hospital?.name }}</li>
+        <li class="list-group-item">
+        <a [routerLink]="" (click)="showDetailsHospital = !showDetailsHospital">
+        <strong class="Topic">Hospital:</strong></a> {{ hospital?.name }}
+        <div *ngIf="showDetailsHospital"> Endereço: {{ hospital?.city }}
+            {{ hospital?.neighborhood }} {{ hospital?.address }} {{ hospital?.numeral }} {{ hospital?.complement }}
+        </div>
+        </li>
         <li class="list-group-item"><strong class="Topic">Data de internação:</strong> {{ patient.hospitalizationDate |
           date:'dd-MM-yyyy'}}</li>
         <li class="list-group-item"><strong class="Topic">Data de alta médica:</strong> {{ patient.medicalRelease |
           date:'dd-MM-yyyy' }}</li>
       </ul>
       <ul class="list-group col-md-4">
-        <li class="list-group-item"><strong class="Topic">Hospedagem:</strong> {{ accommodation?.name }}</li>
+        <li class="list-group-item">
+            <a [routerLink]="" (click)="showDetailsAccommodation = !showDetailsAccommodation ">
+              <strong class="Topic">Hospedagem:</strong></a> {{ accommodation?.name }}
+              <div *ngIf="showDetailsAccommodation"> Endereço: {{ accommodation?.city }}
+                  {{ accommodation?.neighborhood }} {{ accommodation?.address }} {{ accommodation?.numeral }} {{ accommodation?.complement }}
+              </div>
+            </li>
         <li class="list-group-item"><strong class="Topic">Celular Ancião 1:</strong> {{ patient.mobileElder1 }}</li>
         <li class="list-group-item"><strong class="Topic">Celular Ancião 2:</strong> {{ patient.mobileElder2 }}</li>
         <li class="list-group-item"><strong class="Topic">Telefone Ancião 1:</strong> {{ patient.phoneElder1 }}</li>

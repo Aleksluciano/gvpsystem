@@ -24,7 +24,7 @@
     </div>
   </div>
   <div class="col-md-2 mt-1">
-      <a routerLink="/user/add" class="btn btn-success btn-block">
+      <a routerLink="add" class="btn btn-success btn-block">
         <i class="fa fa-plus"> Novo</i>
       </a>
     </div>
@@ -44,12 +44,12 @@
       </thead>
       <tbody @fade>
         <tr *ngFor="let user of  users | filter: filteredName : 'firstName' : 'lastName' | filter: filteredEmail: 'email'">
-          <td><a routerLink="user/{{ user.id }}">{{ user.firstName }} {{ user.lastName }}</a></td>
+          <td><a routerLink="{{ user.id }}">{{ user.firstName }} {{ user.lastName }}</a></td>
           <td class="colhide">{{ user.email }}</td>
           <td class="colhide">{{ user.mobilePhone }}</td>
           <td class="colhide">{{ user.congregation }}</td>
-        <td><button id="eyeButton" routerLink="/user/{{ user.id }}"><i class="fa fa-eye" aria-hidden="true"></i></button></td>
-        <td><button id="editButton" routerLink="/user/edit/{{ user.id }}"><i class="fa fa-edit" aria-hidden="true"></i></button></td>
+        <td><button id="eyeButton" routerLink="{{ user.id }}"><i class="fa fa-eye" aria-hidden="true"></i></button></td>
+        <td><button id="editButton" routerLink="edit/{{ user.id }}"><i class="fa fa-edit" aria-hidden="true"></i></button></td>
         <td><button id="deleteButton" (click)="onDeleteClick(user.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
       </td>
 

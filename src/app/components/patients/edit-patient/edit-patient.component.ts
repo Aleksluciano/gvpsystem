@@ -4,6 +4,7 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { trigger, transition, style, animate } from "@angular/animations";
 import { FlashMessagesService } from "angular2-flash-messages";
 import { Router, ActivatedRoute } from "@angular/router";
+import { Location } from "@angular/common";
 
 import { NgxViacepService } from "@brunoc/ngx-viacep";
 import { AngularEditorConfig } from "@kolkov/angular-editor";
@@ -71,7 +72,8 @@ export class EditPatientComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private hospitalsService: HospitalsService,
-    private accommodationsService: AccommodationsService
+    private accommodationsService: AccommodationsService,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -205,5 +207,9 @@ export class EditPatientComponent implements OnInit, OnDestroy {
   searchById(elements, id) {
     let el = elements.filter(c => c.id == id);
     return el[0];
+  }
+
+  onBackClicked() {
+    this.location.back();
   }
 }

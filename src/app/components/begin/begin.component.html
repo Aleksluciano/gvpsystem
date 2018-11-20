@@ -1,0 +1,43 @@
+<div class="row" @fade>
+<div class="col-md-3">
+  <div class="card text-center text-white mb-3" id="cardUser">
+  <div class="card-body">
+    <h3>Gvp's</h3>
+    <h4 class="display-4">
+        <i class="fa fa-users"></i> {{ totalObjects.countUser }}
+    </h4>
+    <a routerLink="/users" class="btn btn-outline-light btn-sm mr-3">Visualizar</a>
+    <a routerLink="/users/add" class="btn btn-outline-light btn-sm">+ Criar</a>
+  </div>
+</div>
+</div>
+
+<div class="col-md-3">
+    <div class="card text-center text-white mb-3" id="cardPatient">
+    <div class="card-body">
+      <h3>Pacientes</h3>
+      <h4 class="display-4">
+          <i class="fa fa-bed"></i> {{ totalObjects.countPatient }}
+      </h4>
+      <a routerLink="/patients" class="btn btn-outline-light btn-sm mr-3">Visualizar</a>
+      <a routerLink="/patients/add" class="btn btn-outline-light btn-sm">+ Criar</a>
+    </div>
+  </div>
+  </div>
+
+
+<div class="col-md-3">
+    <div class="card text-center text-white mb-3" id="cardReport">
+    <div class="card-body">
+      <h3>Relatórios</h3>
+      <h4 class="display-4">
+          <i class="fa fa-file"></i> {{ totalObjects.countReport }}
+      </h4>
+      <a routerLink="/patients" class="btn btn-outline-light btn-sm mr-3">Visualizar</a>
+      <a routerLink="/patients/add" class="btn btn-outline-light btn-sm">+ Criar</a>
+    </div>
+  </div>
+  </div>
+</div>
+
+

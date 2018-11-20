@@ -5,6 +5,7 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { trigger, transition, style, animate } from "@angular/animations";
 import { FlashMessagesService } from "angular2-flash-messages";
 import { Router, ActivatedRoute } from "@angular/router";
+import { Location } from "@angular/common";
 
 import { NgxViacepService } from "@brunoc/ngx-viacep";
 
@@ -40,7 +41,8 @@ export class EditUserComponent implements OnInit, OnDestroy {
     private congregationsService: CongregationsService,
     private viacep: NgxViacepService,
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -95,11 +97,11 @@ export class EditUserComponent implements OnInit, OnDestroy {
         this.user.city = endereco.localidade;
         this.user.neighborhood = endereco.bairro;
         this.user.address = endereco.logradouro;
-        
+
       })
       .catch(error => {
         // Alguma coisa deu errado :/
-    
+
         this.dialog.open(InfoModalComponent, {
           data: { title: "Erro", message: error.message }
         });
@@ -117,5 +119,9 @@ export class EditUserComponent implements OnInit, OnDestroy {
       c => c.name == this.user.congregation
     );
     return congs[0];
+  }
+
+  onBackClicked() {
+    this.location.back();
   }
 }

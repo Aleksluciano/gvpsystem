@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import { Location } from "@angular/common";
 
 import { UsersService } from './../users.service';
 import { User } from '../user.model';
@@ -35,7 +35,8 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     private usersService: UsersService,
     private router: Router,
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -48,7 +49,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
       this.usersSub = this.usersService
       .getUsersUpdateListener()
       .subscribe( ()  => {
-        this.router.navigate(["/"]);
+        this.router.navigate(["/users"]);
       });
 
 
@@ -69,5 +70,8 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
 
   }
 
+  onBackClicked() {
+    this.location.back();
+  }
 
 }
