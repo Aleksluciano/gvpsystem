@@ -104,6 +104,19 @@ exports.getPatients = async (req, res, next) => {
 
 
 
+exports.getOnePatient = async (req, res, next) => {
+
+  const fetchedPatient = await Patient.findById({_id: req.params.id});
+
+  res.status(200).json({
+    message: "Patient fetched successfully!",
+    patient: fetchedPatient
+  });
+
+}
+
+
+
 
 exports.deletePatient = async(req, res, next) => {
 

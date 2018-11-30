@@ -19,6 +19,10 @@ import { ErrorInterceptor } from './error-interceptor';
 import { ErrorComponent } from './error/error.component';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 import { BeginComponent } from './components/begin/begin.component';
+import { AddReportComponent } from './components/reports/add-report/add-report.component';
+import { EditReportComponent } from './components/reports/edit-report/edit-report.component';
+import { ListReportsComponent } from './components/reports/list-reports/list-reports.component';
+import { ReportDetailsComponent } from './components/reports/report-details/report-details.component';
 
 
 
@@ -32,7 +36,11 @@ import { BeginComponent } from './components/begin/begin.component';
     ErrorComponent,
     ConfirmModalComponent,
     InfoModalComponent,
-    BeginComponent
+    BeginComponent,
+    AddReportComponent,
+    EditReportComponent,
+    ListReportsComponent,
+    ReportDetailsComponent
   ],
   imports: [
     AppRoutingModule,

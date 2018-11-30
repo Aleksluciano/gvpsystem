@@ -32,7 +32,7 @@ import { AccommodationsService } from "../../accommodations/accommodations.servi
 })
 export class EditPatientComponent implements OnInit, OnDestroy {
   id: string;
-  patient: Patient;
+  patientSub: Subscription;
   maskPhones: MaskPhones;
 
   congregations: Congregation[] = [];
@@ -46,6 +46,33 @@ export class EditPatientComponent implements OnInit, OnDestroy {
   hospitals: Hospital[] = [];
   hospitalsSub: Subscription;
   hospital: Hospital;
+
+  patient: Patient = {
+    id: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    mobilePhone: "",
+    phone: "",
+    cep: "",
+    state: "",
+    city: "",
+    neighborhood: "",
+    address: "",
+    numeral: null,
+    complement: "",
+    congregation: "",
+    mobileElder1: "",
+    mobileElder2: "",
+    phoneElder1:  "",
+    phoneElder2:  "",
+    caseDescription: "",
+    hospital: "",
+    hospitalizationDate: null,
+    medicalRelease: null,
+    accommodation: "",
+    infoWho: "",
+  };
 
   config: AngularEditorConfig = {
     editable: true,
@@ -80,23 +107,19 @@ export class EditPatientComponent implements OnInit, OnDestroy {
     // Get id from url
     this.id = this.route.snapshot.params["id"];
     // Get client
-    this.patient = this.patientsService.getPatient(this.id);
 
-    // let patientPromise = new Promise((resolve, reject)=>{
-    //   let patient = this.patientsService.getPatient(this.id);
-    //   resolve(patient);
-    //   reject();
-    // })
+    let patient = this.patientsService.getPatient(this.id);
+    if (patient)this.patient = patient;
+    else{
+      this.patientsService.getOnePatientServer(this.id);
+    }
 
-    // patientPromise.then((patient: Patient)=>{
-    //   this.patient = patient;
+    this.patientSub = this.patientsService.getOnePatientUpdateListener().subscribe((patient) => this.patient = patient)
 
-    //   console.log(this.patient);
-    // })
 
     this.maskPhones = new MaskPhones(this.patient);
 
-    // this.maskPhones = new MaskPhones(this.patient);
+
 
     this.congregations = this.congregationsService.Congregations;
 
@@ -195,6 +218,7 @@ export class EditPatientComponent implements OnInit, OnDestroy {
     this.congregationsSub.unsubscribe();
     this.hospitalsSub.unsubscribe();
     this.accommodationsSub.unsubscribe();
+    this.patientSub.unsubscribe();
   }
 
   searchCongregation() {

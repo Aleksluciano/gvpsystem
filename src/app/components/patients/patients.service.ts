@@ -17,7 +17,9 @@ const BACKEND_URL = environment.apiUrl + "/patients/";
 })
 export class PatientsService {
   private patients: Patient[] = [];
+  private patient: Patient;
   private patientsUpdated = new Subject<Patient[]>();
+  private onePatientUpdated = new Subject<Patient>();
   private warnFlashMessage = new Subject<void>();
 
 
@@ -126,6 +128,50 @@ export class PatientsService {
       });
   }
 
+
+  getOnePatientServer(id: string) {
+
+    this.http
+      .get<{ message: string; patient: any}>(
+        BACKEND_URL + id
+      )
+      .pipe(
+        map(responseData => {
+          return <Patient>{
+                id: responseData.patient._id,
+                firstName: responseData.patient.firstName,
+                lastName: responseData.patient.lastName,
+                email: responseData.patient.email,
+                mobilePhone: responseData.patient.mobilePhone,
+                phone: responseData.patient.phone,
+                cep: responseData.patient.cep,
+                state: responseData.patient.state,
+                city: responseData.patient.city,
+                neighborhood: responseData.patient.neighborhood,
+                address: responseData.patient.address,
+                numeral: responseData.patient.numeral,
+                complement: responseData.patient.complement,
+                congregation: responseData.patient.congregation,
+                mobileElder1: responseData.patient.mobileElder1,
+                mobileElder2: responseData.patient.mobileElder2,
+                phoneElder1:  responseData.patient.phoneElder1,
+                phoneElder2:  responseData.patient.phoneElder2,
+                caseDescription: responseData.patient.caseDescription,
+                hospital: responseData.patient.hospital,
+                hospitalizationDate: responseData.patient.hospitalizationDate,
+                medicalRelease: responseData.patient.medicalRelease,
+                accommodation: responseData.patient.accommodation,
+                infoWho: responseData.patient.infoWho
+              }
+          }
+        )
+      )
+      .subscribe(responseData => {
+        this.patient = responseData;
+          this.onePatientUpdated.next(this.patient);
+      });
+  }
+
   get Patients(){
     return this.patients || [];
   }
@@ -134,6 +180,9 @@ export class PatientsService {
     return this.patientsUpdated.asObservable();
   }
 
+  getOnePatientUpdateListener() {
+    return this.onePatientUpdated.asObservable();
+  }
 
 
   deletePatient(id: string) {

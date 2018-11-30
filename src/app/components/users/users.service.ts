@@ -17,7 +17,9 @@ const BACKEND_URL = environment.apiUrl + "/users/";
 })
 export class UsersService {
   private users: User[] = [];
+  private user: User;
   private usersUpdated = new Subject<User[]>();
+  private oneUserUpdated = new Subject<User>();
   private warnFlashMessage = new Subject<void>();
 
 
@@ -111,12 +113,52 @@ export class UsersService {
       });
   }
 
+  getOneUserServer(id: string) {
+
+    this.http
+      .get<{ message: string; user: any}>(
+        BACKEND_URL + id
+      )
+      .pipe(
+        map(responseData => {
+             return <User>{
+                id: responseData.user._id,
+                firstName: responseData.user.firstName,
+                lastName: responseData.user.lastName,
+                email: responseData.user.email,
+                mobilePhone: responseData.user.mobilePhone,
+                phone: responseData.user.phone,
+                cep: responseData.user.cep,
+                state: responseData.user.state,
+                city: responseData.user.city,
+                neighborhood: responseData.user.neighborhood,
+                address: responseData.user.address,
+                numeral: responseData.user.numeral,
+                complement: responseData.user.complement,
+                congregation: responseData.user.congregation,
+                perfil: responseData.user.perfil,
+                region: responseData.user.region
+              }
+            }
+        )
+        )
+
+      .subscribe(responseData => {
+        this.user = responseData;
+        this.oneUserUpdated.next(this.user);
+      });
+  }
+
   get Users(){
     return this.users || [];
   }
 
   getUsersUpdateListener() {
     return this.usersUpdated.asObservable();
+  }
+
+  getOneUserUpdateListener() {
+    return this.oneUserUpdated.asObservable();
   }
 
 

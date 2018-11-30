@@ -85,6 +85,19 @@ exports.getUsers = async (req, res, next) => {
 
 
 
+exports.getOneUser = async (req, res, next) => {
+
+  const fetchedUser = await User.findById({_id: req.params.id },{password:0});
+
+  res.status(200).json({
+    message: "User fetched successfully!",
+    user: fetchedUser
+  });
+
+}
+
+
+
 
 exports.deleteUser = async(req, res, next) => {
 

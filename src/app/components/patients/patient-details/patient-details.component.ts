@@ -37,6 +37,7 @@ export class PatientDetailsComponent implements OnInit, OnDestroy {
   // patient: Patient;
 
   patientsSub: Subscription;
+  patientSub: Subscription;
 
   accommodations: Accommodation[] = [];
   accommodation: Accommodation;
@@ -108,8 +109,16 @@ export class PatientDetailsComponent implements OnInit, OnDestroy {
       this.id = this.route.snapshot.params['id'];
       // Get client
 
-      this.patient = this.patientsService.getPatient(this.id);
+      let patient = this.patientsService.getPatient(this.id);
+      if (patient)this.patient = patient;
+      else{
+        this.patientsService.getOnePatientServer(this.id);
+      }
 
+      this.patientSub = this.patientsService.getOnePatientUpdateListener().subscribe((patient) => this.patient = patient)
+
+
+      //When delete return to list screen
       this.patientsSub = this.patientsService
       .getPatientsUpdateListener()
       .subscribe( ()  => {
@@ -168,10 +177,9 @@ export class PatientDetailsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
       this.patientsSub.unsubscribe();
+      this.patientSub.unsubscribe();
       this.accommodationsSub.unsubscribe();
       this.hospitalsSub.unsubscribe();
-
-
   }
 
   searchById(elements, id) {

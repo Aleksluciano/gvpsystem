@@ -29,6 +29,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   id: string;
   user: User;
 
+  userSub: Subscription;
   usersSub: Subscription;
 
   constructor(
@@ -44,8 +45,16 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
       // Get id from url
       this.id = this.route.snapshot.params['id'];
       // Get client
-      this.user = this.usersService.getUser(this.id);
 
+      let user = this.usersService.getUser(this.id);
+      if (user)this.user = user;
+      else{
+        this.usersService.getOneUserServer(this.id);
+      }
+
+      this.userSub = this.usersService.getOneUserUpdateListener().subscribe((user) => this.user = user)
+
+      //When delete return to list screen
       this.usersSub = this.usersService
       .getUsersUpdateListener()
       .subscribe( ()  => {
@@ -66,7 +75,8 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-      this.usersSub.unsubscribe();
+    this.usersSub.unsubscribe();
+    this.userSub.unsubscribe();
 
   }
 
