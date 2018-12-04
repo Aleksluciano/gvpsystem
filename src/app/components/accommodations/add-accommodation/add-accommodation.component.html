@@ -9,6 +9,7 @@
 
 <div id="bodyForm" class="card card-body mb-3" @fade>
 <form #accommodationForm="ngForm" (ngSubmit)="onSubmit(accommodationForm)">
+    <p>Os campos com * são obrigatórios</p>
   <div class="form-group">
     <input type="text"
     #nameRef
@@ -16,7 +17,7 @@
     [ngModel]="accommodation.name"
     (ngModelChange)="accommodation.name = $event"
     class="form-control"
-    placeholder="Hospedagem...">
+    placeholder="*Hospedagem...">
   </div>
   <div class="row">
 
@@ -66,7 +67,7 @@
                   [ngClass]="{'is-invalid':stateModel.errors && stateModel.touched}"
                   [(ngModel)]="accommodation.state"
                   maxlength="2"
-                  placeholder="UF"
+                  placeholder="*UF"
                   >
 
                 </div>
@@ -82,7 +83,7 @@
                      #cityModel="ngModel"
                      [ngClass]="{'is-invalid':cityModel.errors && cityModel.touched}"
                      [(ngModel)]="accommodation.city"
-                     placeholder="Cidade"
+                     placeholder="*Cidade"
                      >
 
                    </div>
@@ -98,7 +99,7 @@
                        #neighborhoodModel="ngModel"
                        [ngClass]="{'is-invalid':neighborhoodModel.errors && neighborhoodModel.touched}"
                        [(ngModel)]="accommodation.neighborhood"
-                       placeholder="Bairro"
+                       placeholder="*Bairro"
                        >
 
                      </div>
@@ -114,7 +115,7 @@
                          #addressModel="ngModel"
                          [ngClass]="{'is-invalid':addressModel.errors && addressModel.touched}"
                          [(ngModel)]="accommodation.address"
-                         placeholder="Logradouro"
+                         placeholder="*Logradouro"
                          >
 
                        </div>
@@ -130,7 +131,7 @@
                          #numeralModel="ngModel"
                          [ngClass]="{'is-invalid':numeralModel.errors && numeralModel.touched}"
                          [(ngModel)]="accommodation.numeral"
-                         placeholder="Nº"
+                         placeholder="*Nº"
                          >
 
                        </div>
@@ -162,7 +163,7 @@
                       [ngModel]="accommodation.responsable"
                       (ngModelChange)="accommodation.responsable = $event"
                       class="form-control"
-                      placeholder="Responsável...">
+                      placeholder="*Responsável...">
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -177,7 +178,7 @@
                         (keypress)="maskPhones.onKeyPressMobilePhone($event)"
                         minlength="15"
                         maxlength="15"
-                        placeholder="(00) 00000-0000 - celular"
+                        placeholder="*(00) 00000-0000 - celular"
                         >
 
                         <div [hidden]="!mobilePhoneModel.errors?.minlength" class="invalid-feedback">
@@ -212,7 +213,8 @@
                       </div>
                     </div>
 
-  <input type="submit" [value]="textInput" class="btn btn-light" [disabled]="!accommodation.name">
+  <input type="submit" [value]="textInput" class="btn btn-light"
+  [disabled]="!accommodation.name || !accommodation.state || !accommodation.city || !accommodation.neighborhood || !accommodation.address || !accommodation.numeral || !accommodation.responsable || !accommodation.mobilePhone" >
   <button id="resetButton"(click)="clearState()" type="button" class="btn btn-info" [hidden]="!accommodation.name && this.textInput != 'Atualizar'">Reset</button>
 </form>
 </div>

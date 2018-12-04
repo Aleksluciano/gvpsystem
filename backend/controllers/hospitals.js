@@ -14,7 +14,7 @@ exports.createHospital = async (req, res, next) => {
   });
 
   savedHospital = await hospital.save();
-  savedHospital.password = "";
+
   res.status(201).json({
     message: "Hospital created!",
     hospital: savedHospital

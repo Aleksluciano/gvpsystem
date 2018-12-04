@@ -10,7 +10,7 @@ import {MatDialogModule} from "@angular/material";
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
-import { UsersModule} from './components/users/users.module';
+
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -19,11 +19,6 @@ import { ErrorInterceptor } from './error-interceptor';
 import { ErrorComponent } from './error/error.component';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 import { BeginComponent } from './components/begin/begin.component';
-import { AddReportComponent } from './components/reports/add-report/add-report.component';
-import { EditReportComponent } from './components/reports/edit-report/edit-report.component';
-import { ListReportsComponent } from './components/reports/list-reports/list-reports.component';
-import { ReportDetailsComponent } from './components/reports/report-details/report-details.component';
-
 
 
 
@@ -37,10 +32,6 @@ import { ReportDetailsComponent } from './components/reports/report-details/repo
     ConfirmModalComponent,
     InfoModalComponent,
     BeginComponent,
-    AddReportComponent,
-    EditReportComponent,
-    ListReportsComponent,
-    ReportDetailsComponent
   ],
   imports: [
     AppRoutingModule,

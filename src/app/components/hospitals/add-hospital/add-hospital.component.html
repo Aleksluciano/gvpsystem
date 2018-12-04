@@ -9,6 +9,7 @@
 
 <div id="bodyForm" class="card card-body mb-3" @fade>
   <form #hospitalForm="ngForm" (ngSubmit)="onSubmit(hospitalForm)">
+      <p>Os campos com * são obrigatórios</p>
     <div class="form-group">
       <input type="text"
       #nameRef
@@ -16,7 +17,7 @@
       [ngModel]="hospital.name"
       (ngModelChange)="hospital.name = $event"
       class="form-control"
-      placeholder="Hospital...">
+      placeholder="*Hospital...">
     </div>
     <div class="row">
 
@@ -54,7 +55,7 @@
                     [ngClass]="{'is-invalid':stateModel.errors && stateModel.touched}"
                     [(ngModel)]="hospital.state"
                     maxlength="2"
-                    placeholder="UF"
+                    placeholder="*UF"
                     >
 
                   </div>
@@ -70,7 +71,7 @@
                        #cityModel="ngModel"
                        [ngClass]="{'is-invalid':cityModel.errors && cityModel.touched}"
                        [(ngModel)]="hospital.city"
-                       placeholder="Cidade"
+                       placeholder="*Cidade"
                        >
 
                      </div>
@@ -86,7 +87,7 @@
                          #neighborhoodModel="ngModel"
                          [ngClass]="{'is-invalid':neighborhoodModel.errors && neighborhoodModel.touched}"
                          [(ngModel)]="hospital.neighborhood"
-                         placeholder="Bairro"
+                         placeholder="*Bairro"
                          >
 
                        </div>
@@ -102,7 +103,7 @@
                            #addressModel="ngModel"
                            [ngClass]="{'is-invalid':addressModel.errors && addressModel.touched}"
                            [(ngModel)]="hospital.address"
-                           placeholder="Logradouro"
+                           placeholder="*Logradouro"
                            >
 
                          </div>
@@ -118,7 +119,7 @@
                            #numeralModel="ngModel"
                            [ngClass]="{'is-invalid':numeralModel.errors && numeralModel.touched}"
                            [(ngModel)]="hospital.numeral"
-                           placeholder="Nº"
+                           placeholder="*Nº"
                            >
 
                          </div>
@@ -141,7 +142,8 @@
                          </div>
                       </div>
                     </div>
-    <input type="submit" [value]="textInput" class="btn btn-light" [disabled]="!hospital.name">
+    <input type="submit" [value]="textInput" class="btn btn-light"
+    [disabled]="!hospital.name || !hospital.state || !hospital.city || !hospital.neighborhood || !hospital.address || !hospital.numeral">
     <button id="resetButton"(click)="clearState()" type="button" class="btn btn-info" [hidden]="!hospital.name && this.textInput != 'Atualizar'">Reset</button>
   </form>
 </div>

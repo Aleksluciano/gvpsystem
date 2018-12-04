@@ -32,7 +32,11 @@
          <li class="list-group-item"><strong class="Topic">Perfil:</strong> {{ user.perfil }}</li>
          <li class="list-group-item"><strong class="Topic">Região:</strong> {{ user.region }}</li>
         </ul>
-        <ul class="list-group col-md-4">
+      <ul class="list-group col-md-4">
+         <li class="list-group-item"><strong class="Topic">Endereço:</strong> {{ user.address }}, {{ user.numeral }}
+          {{ user.complement }} - {{ user.neighborhood }} - {{ user.city }} - {{ user.state }}</li>
+      </ul>
+        <!-- <ul class="list-group col-md-4">
          <li class="list-group-item"><strong class="Topic">Estado:</strong> {{ user.state }}</li>
          <li class="list-group-item"><strong class="Topic">Cidade:</strong> {{ user.city }}</li>
          <li class="list-group-item"><strong class="Topic">Bairro:</strong> {{ user.neighborhood }}</li>
@@ -42,7 +46,7 @@
       </ul>
       <ul class="list-group col-md-4">
           <li class="list-group-item"><strong class="Topic">Cep:</strong> {{ user.cep }}</li>
-        </ul>
+        </ul> -->
     </div>
     </div>
   </div>

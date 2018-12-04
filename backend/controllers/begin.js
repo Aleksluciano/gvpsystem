@@ -3,8 +3,8 @@ const Patient = require("../models/patient");
 
 exports.countObjects = async (req, res, next) => {
 
-  countedUser = await User.find().count();
-  countedPatient = await Patient.find().count();
+  countedUser = await User.find().countDocuments();
+  countedPatient = await Patient.find().countDocuments();
   countedReport = 0;
 
  countData = {

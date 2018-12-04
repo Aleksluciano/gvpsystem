@@ -9,6 +9,7 @@
 
   <div id="bodyForm" class="card card-body mb-3" @fade>
     <form #congregationForm="ngForm" (ngSubmit)="onSubmit(congregationForm)">
+      <p>Os campos com * são obrigatórios</p>
       <div class="form-group">
         <input type="text"
         #nameRef
@@ -16,7 +17,7 @@
         [ngModel]="congregation.name"
         (ngModelChange)="congregation.name = $event"
         class="form-control"
-        placeholder="Congregação...">
+        placeholder="*Congregação...">
       </div>
       <input type="submit" [value]="textInput" class="btn btn-light" [disabled]="!congregation.name">
       <button id="resetButton"(click)="clearState()" type="button" class="btn btn-info" [hidden]="!congregation.name && this.textInput != 'Atualizar'">Reset</button>

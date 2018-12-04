@@ -408,20 +408,6 @@
         </div>
       </div>
 </div>
-<div class="row">
-<div class="col-md-3">
-<br><br>
-<h6 class="card-subtitle mb-2 text-muted">Descrição do caso</h6>
-
-</div>
-</div>
-
-<div class="container" id="divEditor">
-<br>
-<angular-editor
-id="myEditor" name="caseDescription"  [(ngModel)]="patient.caseDescription"   [config]="config"></angular-editor>
-<br>
-</div>
 
 <div class="row">
 <div class="col-md-3">
@@ -529,7 +515,20 @@ id="myEditor" name="caseDescription"  [(ngModel)]="patient.caseDescription"   [c
 </div>
 
 
+<div class="row">
+  <div class="col-md-3">
+  <br><br>
+  <h6 class="card-subtitle mb-2 text-muted">Descrição do caso</h6>
 
+  </div>
+  </div>
+
+  <div class="container" id="divEditor">
+  <br>
+  <angular-editor
+  id="myEditor" name="caseDescription"  [(ngModel)]="patient.caseDescription"   [config]="config"></angular-editor>
+  <br>
+  </div>
 
 
 <br><br>

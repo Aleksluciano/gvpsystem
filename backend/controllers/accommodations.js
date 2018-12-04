@@ -17,7 +17,6 @@ exports.createAccommodation = async (req, res, next) => {
   });
 
   savedAccommodation = await accommodation.save();
-  savedAccommodation.password = "";
   res.status(201).json({
     message: "Accommodation created!",
     accommodation: savedAccommodation

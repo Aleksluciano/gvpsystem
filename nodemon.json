@@ -1,5 +1,6 @@
 {
   "env": {
-    "DB": "mongodb://localhost:27017/gvp-database"
+    "USER_DATABASE": "gvpsistematj",
+    "PASS_DATABASE": "betel@1914"
   }
 }

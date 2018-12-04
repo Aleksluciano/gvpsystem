@@ -1,5 +1,5 @@
 label {
-  color: blueviolet;
+  color: steelblue;
   font-size: 15px;
 }
 
@@ -17,7 +17,7 @@ label {
 
 .btn-primary {
   color: #ffffff;
-  background-color: #611BBD;
+  background-color: steelblue;
   border-color: #130269;
 }
 
@@ -27,7 +27,7 @@ label {
 .btn-primary:visited,
 .btn-primary:focus {
   color: #ffffff;
-  background-color: #49247A !important;
+  background-color: royalblue !important;
   border-color: #130269;
 }
 

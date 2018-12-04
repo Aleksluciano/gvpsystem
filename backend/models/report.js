@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
-const uniqueValidator = require("mongoose-unique-validator");
 
 const reportSchema = mongoose.Schema({
-   type: { type: String },
+   typeReport: { type: String, required: true },
    patientId: { type: mongoose.Schema.Types.ObjectId, ref: "Patient" },
    assitantId: { type: mongoose.Schema.Types.ObjectId, ref: "Assistant" },
    visitDate: { type: Date},
    gvpId1: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true},
    gvpId2: { type: mongoose.Schema.Types.ObjectId, ref: "User"},
+   description: { type: String}
 });
 
 // reportSchema.plugin(uniqueValidator, { message: 'O nome já existe no sistema!' });

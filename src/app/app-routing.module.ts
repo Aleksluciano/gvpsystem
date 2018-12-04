@@ -2,18 +2,8 @@ import { BeginComponent } from './components/begin/begin.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes} from '@angular/router'
 
-import { AddUserComponent } from './components/users/add-user/add-user.component';
-import { EditUserComponent } from './components/users/edit-user/edit-user.component';
-import { UserDetailsComponent } from './components/users/user-details/user-details.component';
-import { ListUsersComponent } from './components/users/list-users/list-users.component';
-
-
 const routes: Routes = [
 
-  // {path: "", component: ListUsersComponent},
-  // {path: "user/add", component: AddUserComponent},
-  // {path: "user/edit/:id", component: EditUserComponent},
-  // {path: "user/:id", component: UserDetailsComponent},
   {path: "", component: BeginComponent},
   {path: "users", loadChildren: "./components/users/users.module#UsersModule"},
   {path: "congregations", loadChildren: "./components/congregations/congregations.module#CongregationsModule"},
@@ -21,6 +11,7 @@ const routes: Routes = [
   {path: "accommodations", loadChildren: "./components/accommodations/accommodations.module#AccommodationsModule"},
   {path: "assistants", loadChildren: "./components/social-assistants/assistants.module#AssistantsModule"},
   {path: "patients", loadChildren: "./components/patients/patients.module#PatientsModule"},
+  {path: "reports", loadChildren: "./components/reports/reports.module#ReportsModule"},
 ]
 
 @NgModule({

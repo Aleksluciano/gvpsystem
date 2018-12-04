@@ -7,7 +7,7 @@ import { map } from "rxjs/operators";
 import { Begin } from "./begin.model";
 
 
-const BACKEND_URL = environment.apiUrl + "/begin/";
+const BACKEND_URL = environment.apiUrl + "/begin";
 
 @Injectable({
   providedIn: "root"

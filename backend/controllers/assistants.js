@@ -10,7 +10,6 @@ exports.createAssistant = async (req, res, next) => {
   });
 
   savedAssistant = await assistant.save();
-  savedAssistant.password = "";
   res.status(201).json({
     message: "Assistant created!",
     assistant: savedAssistant

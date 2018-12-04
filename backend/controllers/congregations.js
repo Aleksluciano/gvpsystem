@@ -7,7 +7,6 @@ exports.createCongregation = async (req, res, next) => {
   });
 
   savedCongregation = await congregation.save();
-  savedCongregation.password = "";
   res.status(201).json({
     message: "Congregation created!",
     congregation: savedCongregation

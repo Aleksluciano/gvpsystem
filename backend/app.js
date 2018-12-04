@@ -11,6 +11,7 @@ const hospitalsRoutes = require("./routes/hospitals");
 const accommodationsRoutes = require("./routes/accommodations");
 const assistantsRoutes = require("./routes/assistants");
 const patientsRoutes = require("./routes/patients");
+const reportsRoutes = require("./routes/reports");
 //const config = require('./config/default.json');
 
 const app = express();
@@ -20,12 +21,14 @@ const app = express();
 //Connect database
 mongoose.set('useCreateIndex', true) //DeprecationWarning ensureIndex eliminated
 
+// use encodeURIComponent because the password has special characters
 mongoose
-  .connect(process.env.DB,{ useNewUrlParser: true })
+  .connect(`mongodb://${process.env.USER_DATABASE}:${encodeURIComponent(process.env.PASS_DATABASE)}@ds137267.mlab.com:37267/gvpdatabase`,{ useNewUrlParser: true })
   .then(() => {
     console.log("Connected to database!");
   })
-  .catch(() => {
+  .catch((e) => {
+    console.log(e);
     console.log("Connection failed!");
   });
 
@@ -33,7 +36,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.options('*', cors()); // include before other routes
 app.use("/images", express.static(path.join("images")));
-// app.use("/", express.static(path.join(__dirname, "angular")));
+app.use("/", express.static(path.join(__dirname, "angular")));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -56,9 +59,10 @@ app.use("/api/hospitals", hospitalsRoutes);
 app.use("/api/accommodations", accommodationsRoutes);
 app.use("/api/assistants", assistantsRoutes);
 app.use("/api/patients", patientsRoutes);
+app.use("/api/reports", reportsRoutes);
 
-// app.use((req, res, next) => {
-//   res.sendFile(path.join(__dirname, "angular", "index.html"));
-// });
+ app.use((req, res, next) => {
+   res.sendFile(path.join(__dirname, "angular", "index.html"));
+ });
 
 module.exports = app;

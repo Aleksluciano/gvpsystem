@@ -29,40 +29,42 @@
         <li class="list-group-item"><strong class="Topic">Celular:</strong> {{ patient.mobilePhone }}</li>
         <li class="list-group-item"><strong class="Topic">Telefone:</strong> {{ patient.phone }}</li>
         <li class="list-group-item"><strong class="Topic">Congregação:</strong> {{ patient.congregation }}</li>
+        <li class="list-group-item"><strong class="Topic">Endereço:</strong> {{ patient.address }}, {{ patient.numeral }}
+          {{ patient.complement }} - {{ patient.neighborhood }} - {{ patient.city }} - {{ patient.state }}</li>
         <li class="list-group-item">
         <a [routerLink]="" (click)="showDetailsHospital = !showDetailsHospital">
         <strong class="Topic">Hospital:</strong></a> {{ hospital?.name }}
-        <div *ngIf="showDetailsHospital"> Endereço: {{ hospital?.city }}
-            {{ hospital?.neighborhood }} {{ hospital?.address }} {{ hospital?.numeral }} {{ hospital?.complement }}
+        <div *ngIf="showDetailsHospital"> Endereço: {{ hospital.address }}, {{ hospital.numeral }}
+          {{ hospital.complement }} - {{ hospital.neighborhood }} - {{ hospital.city }} - {{ hospital.state }}
         </div>
         </li>
+      </ul>
+      <ul class="list-group col-md-4">
         <li class="list-group-item"><strong class="Topic">Data de internação:</strong> {{ patient.hospitalizationDate |
           date:'dd-MM-yyyy'}}</li>
         <li class="list-group-item"><strong class="Topic">Data de alta médica:</strong> {{ patient.medicalRelease |
           date:'dd-MM-yyyy' }}</li>
-      </ul>
-      <ul class="list-group col-md-4">
         <li class="list-group-item">
             <a [routerLink]="" (click)="showDetailsAccommodation = !showDetailsAccommodation ">
               <strong class="Topic">Hospedagem:</strong></a> {{ accommodation?.name }}
-              <div *ngIf="showDetailsAccommodation"> Endereço: {{ accommodation?.city }}
-                  {{ accommodation?.neighborhood }} {{ accommodation?.address }} {{ accommodation?.numeral }} {{ accommodation?.complement }}
+              <div *ngIf="showDetailsAccommodation"> Endereço: {{ accommodation.address }}, {{ accommodation.numeral }}
+                {{ accommodation.complement }} - {{ accommodation.neighborhood }} - {{ accommodation.city }} - {{ accommodation.state }}
               </div>
             </li>
         <li class="list-group-item"><strong class="Topic">Celular Ancião 1:</strong> {{ patient.mobileElder1 }}</li>
         <li class="list-group-item"><strong class="Topic">Celular Ancião 2:</strong> {{ patient.mobileElder2 }}</li>
         <li class="list-group-item"><strong class="Topic">Telefone Ancião 1:</strong> {{ patient.phoneElder1 }}</li>
-        <li class="list-group-item"><strong class="Topic">Telefone Ancião 2:</strong> {{ patient.phoneElder2 }}</li>
-        <li class="list-group-item"><strong class="Topic">Estado:</strong> {{ patient.state }}</li>
-        <li class="list-group-item"><strong class="Topic">Cidade:</strong> {{ patient.city }}</li>
       </ul>
-      <ul class="list-group col-md-4">
+    <ul class="list-group col-md-4">
+      <li class="list-group-item"><strong class="Topic">Telefone Ancião 2:</strong> {{ patient.phoneElder2 }}</li>
+    </ul>
+      <!-- <ul class="list-group col-md-4">
         <li class="list-group-item"><strong class="Topic">Bairro:</strong> {{ patient.neighborhood }}</li>
         <li class="list-group-item"><strong class="Topic">Logradouro:</strong> {{ patient.address }}</li>
         <li class="list-group-item"><strong class="Topic">Número:</strong> {{ patient.numeral }}</li>
         <li class="list-group-item"><strong class="Topic">Complemento:</strong> {{ patient.complement }}</li>
         <li class="list-group-item"><strong class="Topic">Cep:</strong> {{ patient.cep }}</li>
-      </ul>
+      </ul> -->
 
     </div>
   </div>
